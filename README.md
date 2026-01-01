@@ -1,2 +1,0 @@
-# RankedHonor
-Projeto de ranqueada
