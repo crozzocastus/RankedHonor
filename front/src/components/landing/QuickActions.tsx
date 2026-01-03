@@ -1,4 +1,10 @@
-import { Swords, Trophy, BarChart3, Radio } from 'lucide-react';
+import { Swords, Trophy, BarChart3, Radio, Loader2 } from 'lucide-react';
+
+interface QuickActionsProps {
+  onQuickRankedClick?: () => void;
+  isQuickRankedLoading?: boolean;
+  quickRankedStatus?: string;
+}
 
 const actions = [
   {
@@ -35,21 +41,35 @@ const actions = [
   }
 ];
 
-export function QuickActions() {
+export function QuickActions({ onQuickRankedClick, isQuickRankedLoading, quickRankedStatus }: QuickActionsProps) {
   return (
     <section className="py-8 bg-gradient-to-b from-black to-gray-950">
       <div className="container mx-auto px-6 max-w-[1440px]">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {actions.map((action, index) => {
             const Icon = action.icon;
+            const isLoading = index === 0 && isQuickRankedLoading;
+            
             return (
               <button
                 key={index}
-                className={`group p-6 bg-gradient-to-br ${action.gradient} border ${action.borderColor} rounded-xl hover:scale-105 transition-all text-left`}
+                onClick={index === 0 && !isLoading ? onQuickRankedClick : undefined}
+                className={`group p-6 bg-gradient-to-br ${action.gradient} border ${action.borderColor} rounded-xl hover:scale-105 transition-all text-left ${index === 0 && !isLoading ? 'cursor-pointer' : 'cursor-default'}`}
+                disabled={isLoading}
               >
-                <Icon className={`w-8 h-8 ${action.iconColor} mb-4`} />
-                <h3 className="text-white mb-2">{action.title}</h3>
-                <p className="text-gray-400">{action.description}</p>
+                {isLoading ? (
+                  <div className="flex flex-col items-center justify-center h-full">
+                    <Loader2 className="w-8 h-8 text-orange-500 animate-spin mb-4" />
+                    <h3 className="text-white mb-2">{quickRankedStatus}</h3>
+                    <p className="text-gray-400 text-sm">Buscando partida...</p>
+                  </div>
+                ) : (
+                  <>
+                    <Icon className={`w-8 h-8 ${action.iconColor} mb-4`} />
+                    <h3 className="text-white mb-2">{action.title}</h3>
+                    <p className="text-gray-400">{action.description}</p>
+                  </>
+                )}
               </button>
             );
           })}

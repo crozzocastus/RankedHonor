@@ -1,6 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/contexts/AuthContext';
 import { Header } from '@/components/landing/Header';
 import { HeroSection } from '@/components/landing/HeroSection';
 import { QuickActions } from '@/components/landing/QuickActions';
@@ -12,40 +14,46 @@ import { ContentCreators } from '@/components/landing/ContentCreators';
 import { LauncherSection } from '@/components/landing/LauncherSection';
 import { FinalCTA } from '@/components/landing/FinalCTA';
 import { Footer } from '@/components/landing/Footer';
-import { AuthModal } from '@/components/AuthModal';
 
 export default function Home() {
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
+  const { user, isLoading } = useAuth();
+  const router = useRouter();
   const [selectedRegion, setSelectedRegion] = useState('Global');
 
-  const handleOpenAuth = (mode: 'login' | 'register') => {
-    setAuthMode(mode);
-    setIsAuthModalOpen(true);
-  };
+  // Se já estiver logado, redirecionar para dashboard
+  useEffect(() => {
+    if (user) {
+      router.push('/dashboard');
+    }
+  }, [user, router]);
 
-  const handleLogin = (email: string, password: string) => {
-    console.log('Login:', email);
-    setIsAuthModalOpen(false);
-    // Aqui seria a lógica real de login
-  };
+  // Se ainda está carregando, mostrar loading
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-8 h-8 border-2 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-white">Carregando...</p>
+        </div>
+      </div>
+    );
+  }
 
-  const handleRegister = (name: string, email: string, password: string) => {
-    console.log('Register:', name, email);
-    setIsAuthModalOpen(false);
-    // Aqui seria a lógica real de registro
-  };
+  // Se já está logado, não renderizar nada (o useEffect vai redirecionar)
+  if (user) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen bg-black text-white">
       <Header 
-        onLoginClick={() => handleOpenAuth('login')}
-        onRegisterClick={() => handleOpenAuth('register')}
+        onLoginClick={() => router.push('/login')}
+        onRegisterClick={() => router.push('/register')}
         selectedRegion={selectedRegion}
         onRegionChange={setSelectedRegion}
       />
 
-      <HeroSection onPlayNow={() => handleOpenAuth('register')} />
+      <HeroSection onPlayNow={() => router.push('/register')} />
 
       <QuickActions />
 
@@ -60,21 +68,13 @@ export default function Home() {
 
       <GameModes />
 
-      <ContentCreators onBecomeCreator={() => handleOpenAuth('register')} />
+      <ContentCreators onBecomeCreator={() => router.push('/register')} />
 
       <LauncherSection />
 
-      <FinalCTA onCreateAccount={() => handleOpenAuth('register')} />
+      <FinalCTA onCreateAccount={() => router.push('/register')} />
 
       <Footer />
-
-      <AuthModal
-        isOpen={isAuthModalOpen}
-        onClose={() => setIsAuthModalOpen(false)}
-        onLogin={handleLogin}
-        onRegister={handleRegister}
-        initialMode={authMode}
-      />
     </div>
   );
 }
