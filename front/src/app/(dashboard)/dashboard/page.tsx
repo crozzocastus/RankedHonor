@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { Navbar } from '@/components/layout/Navbar';
+import { Footer } from '@/components/layout/Footer';
 import { DashboardHero } from '@/components/dashboard/DashboardHero';
 import { QuickActions } from '@/components/landing/QuickActions';
 import { MainFeed } from '@/components/landing/MainFeed';
@@ -37,7 +38,7 @@ export default function DashboardPage() {
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center">
         <div className="text-center">
-          <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4 text-amber-500" />
+          <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4 text-orange-500" />
           <p className="text-white">Carregando...</p>
         </div>
       </div>
@@ -91,7 +92,7 @@ export default function DashboardPage() {
       {/* Welcome Message - Sutil, não quebra a continuidade */}
       <div className="container mx-auto px-6 max-w-[1440px]">
         <div className="py-4">
-          <p className="text-amber-500 text-center">
+          <p className="text-orange-500 text-center">
             Bem-vindo de volta, <span className="font-bold">{user.nickname}</span>! 
             <span className="text-gray-400 ml-2">Pronto para dominar?</span>
           </p>
@@ -120,11 +121,12 @@ export default function DashboardPage() {
       {isQuickRankedLoading && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-slate-900 p-8 rounded-lg text-center">
-            <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4 text-amber-500" />
+            <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4 text-orange-500" />
             <p className="text-white">{quickRankedStatus}</p>
           </div>
         </div>
       )}
+      <Footer />
     </div>
   );
 }

@@ -35,7 +35,7 @@ export function LiveFeed() {
     <div className="bg-slate-900 rounded-lg border border-slate-800 p-6">
       <div className="flex items-center gap-2 mb-6">
         <Radio className="w-5 h-5 text-red-500" />
-        <h2 className="text-amber-500">LIVES ATIVAS</h2>
+        <h2 className="text-orange-500">LIVES ATIVAS</h2>
       </div>
 
       <div className="space-y-4">
@@ -62,7 +62,7 @@ export function LiveFeed() {
 
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-8 h-8 bg-amber-600 rounded-full flex items-center justify-center">
+                <div className="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center">
                   <Users className="w-4 h-4 text-slate-900" />
                 </div>
                 <div>

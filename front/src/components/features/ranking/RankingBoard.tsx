@@ -24,8 +24,8 @@ export function RankingBoard() {
   return (
     <div className="bg-slate-900 rounded-lg border border-slate-800 p-6">
       <div className="flex items-center gap-2 mb-6">
-        <Trophy className="w-5 h-5 text-amber-500" />
-        <h2 className="text-amber-500">RANKING GLOBAL</h2>
+        <Trophy className="w-5 h-5 text-orange-500" />
+        <h2 className="text-orange-500">RANKING GLOBAL</h2>
       </div>
 
       <div className="overflow-x-auto">
@@ -47,7 +47,7 @@ export function RankingBoard() {
                 className="border-b border-slate-800/50 hover:bg-slate-800/30 transition-colors"
               >
                 <td className="py-3 px-4">
-                  <span className={index < 3 ? 'text-amber-500' : 'text-slate-400'}>
+                  <span className={index < 3 ? 'text-orange-500' : 'text-slate-400'}>
                     {index + 1}
                   </span>
                 </td>

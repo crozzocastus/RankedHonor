@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { Navbar } from '@/components/layout/Navbar';
+import { Footer } from '@/components/layout/Footer';
 import { User, Shield, Trophy, Target, Swords, Users, Crown, Medal, Award, Settings, Eye, EyeOff } from 'lucide-react';
 
 // Mock de avatares de heróis do For Honor
@@ -54,7 +55,7 @@ export default function ProfilePage() {
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center">
         <div className="text-center">
-          <div className="w-8 h-8 border-2 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <div className="w-8 h-8 border-2 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
           <p className="text-white">Carregando...</p>
         </div>
       </div>
@@ -100,9 +101,9 @@ export default function ProfilePage() {
 
       <div className="container mx-auto px-6 py-8 max-w-[1440px]">
         {/* Header do Perfil */}
-        <div className="bg-gradient-to-r from-amber-600/20 to-orange-600/20 border border-amber-600/30 rounded-xl p-8 mb-8">
+        <div className="bg-gradient-to-r from-orange-600/20 to-orange-600/20 border border-orange-600/30 rounded-xl p-8 mb-8">
           <div className="flex items-center justify-between mb-6">
-            <h1 className="text-3xl font-bold text-amber-500">Perfil do Jogador</h1>
+            <h1 className="text-3xl font-bold text-orange-500">Perfil do Jogador</h1>
             <div className="flex items-center gap-4">
               {/* Toggle de visibilidade */}
               <button
@@ -136,7 +137,7 @@ export default function ProfilePage() {
               ) : (
                 <button
                   onClick={() => setIsEditing(true)}
-                  className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg transition-colors flex items-center gap-2"
+                  className="px-4 py-2 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white rounded-lg transition-colors flex items-center gap-2"
                 >
                   <Settings className="w-4 h-4" />
                   Editar Perfil
@@ -150,13 +151,13 @@ export default function ProfilePage() {
             <div className="space-y-6">
               {/* Avatar */}
               <div className="text-center">
-                <div className="w-32 h-32 mx-auto bg-gradient-to-br from-amber-500 to-orange-600 rounded-full flex items-center justify-center mb-4">
+                <div className="w-32 h-32 mx-auto bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center mb-4">
                   <span className="text-4xl font-bold text-black">{user.nickname[0].toUpperCase()}</span>
                 </div>
                 <h2 className="text-2xl font-bold text-white mb-2">{user.nickname}</h2>
                 <div className="flex items-center justify-center gap-2">
-                  <Shield className="w-4 h-4 text-amber-500" />
-                  <span className="text-amber-500">Jogador Competitivo</span>
+                  <Shield className="w-4 h-4 text-orange-500" />
+                  <span className="text-orange-500">Jogador Competitivo</span>
                 </div>
               </div>
 
@@ -278,7 +279,7 @@ export default function ProfilePage() {
                     <p className="text-gray-400">Derrotas</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-2xl font-bold text-amber-500">{user.stats?.winRate || 0}%</p>
+                    <p className="text-2xl font-bold text-orange-500">{user.stats?.winRate || 0}%</p>
                     <p className="text-gray-400">Win Rate</p>
                   </div>
                 </div>
@@ -304,6 +305,7 @@ export default function ProfilePage() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

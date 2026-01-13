@@ -15,13 +15,13 @@ export function Hero() {
       <div className="absolute inset-0 z-20 flex items-center">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl">
-            <h1 className="text-amber-500 mb-4">SISTEMA DE RANQUEADA</h1>
+            <h1 className="text-orange-500 mb-4">SISTEMA DE RANQUEADA</h1>
             <p className="text-slate-300 mb-6">
               Prove seu valor em combate, suba no ranking e torne-se uma lenda entre os guerreiros.
               Acompanhe lives dos melhores players e entre na batalha!
             </p>
             
-            <div className="bg-slate-900/90 border border-amber-600/30 rounded-lg p-4 mb-6 max-w-md">
+            <div className="bg-slate-900/90 border border-orange-600/30 rounded-lg p-4 mb-6 max-w-md">
               <div className="flex items-start gap-3">
                 <Download className="w-5 h-5 text-green-400 flex-shrink-0 mt-1" />
                 <div className="flex-1">
@@ -48,13 +48,13 @@ export function Hero() {
             </div>
             
             <div className="flex items-center gap-4">
-              <div className="px-4 py-2 bg-amber-600/20 border border-amber-600/50 rounded">
+              <div className="px-4 py-2 bg-orange-600/20 border border-orange-600/50 rounded">
                 <div className="text-slate-400">Jogadores Ativos</div>
-                <div className="text-amber-500">12,847</div>
+                <div className="text-orange-500">12,847</div>
               </div>
-              <div className="px-4 py-2 bg-amber-600/20 border border-amber-600/50 rounded">
+              <div className="px-4 py-2 bg-orange-600/20 border border-orange-600/50 rounded">
                 <div className="text-slate-400">Partidas Hoje</div>
-                <div className="text-amber-500">3,421</div>
+                <div className="text-orange-500">3,421</div>
               </div>
             </div>
           </div>

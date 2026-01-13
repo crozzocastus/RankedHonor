@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { Navbar } from '@/components/layout/Navbar';
+import { Footer } from '@/components/layout/Footer';
 import { Sword, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
 
@@ -51,8 +52,8 @@ export default function LoginPage() {
           {/* Header */}
           <div className="text-center mb-8">
             <div className="flex items-center justify-center gap-3 mb-4">
-              <Sword className="w-12 h-12 text-amber-500" />
-              <h1 className="text-3xl font-bold text-amber-500">FOR HONOR RANKED</h1>
+              <Sword className="w-12 h-12 text-orange-500" />
+              <h1 className="text-3xl font-bold text-orange-500">FOR HONOR RANKED</h1>
             </div>
             <h2 className="text-2xl font-bold text-white mb-2">Entrar na Conta</h2>
             <p className="text-gray-400">
@@ -75,7 +76,7 @@ export default function LoginPage() {
                   value={formData.nickname}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                   placeholder="Seu nickname do jogo"
                 />
               </div>
@@ -93,7 +94,7 @@ export default function LoginPage() {
                     value={formData.password}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent pr-12"
+                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent pr-12"
                     placeholder="Digite sua senha"
                   />
                   <button
@@ -118,7 +119,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-3 bg-amber-600 hover:bg-amber-700 disabled:bg-gray-700 text-white font-bold rounded-lg transition-colors flex items-center justify-center gap-2"
+                className="w-full py-3 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 disabled:bg-gray-700 text-white font-bold rounded-lg transition-colors flex items-center justify-center gap-2"
               >
                 {isLoading ? (
                   <>
@@ -135,7 +136,7 @@ export default function LoginPage() {
             <div className="mt-6 text-center space-y-2">
               <p className="text-gray-400">
                 Não tem uma conta?{' '}
-                <Link href="/register" className="text-amber-500 hover:text-amber-400 transition-colors">
+                <Link href="/register" className="text-orange-500 hover:text-orange-400 transition-colors">
                   Criar conta
                 </Link>
               </p>
@@ -146,6 +147,7 @@ export default function LoginPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { Navbar } from '@/components/layout/Navbar';
+import { Footer } from '@/components/layout/Footer';
 import { Sword, Eye, EyeOff, AlertCircle, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 
@@ -78,8 +79,8 @@ export default function RegisterPage() {
           {/* Header */}
           <div className="text-center mb-8">
             <div className="flex items-center justify-center gap-3 mb-4">
-              <Sword className="w-12 h-12 text-amber-500" />
-              <h1 className="text-3xl font-bold text-amber-500">FOR HONOR RANKED</h1>
+              <Sword className="w-12 h-12 text-orange-500" />
+              <h1 className="text-3xl font-bold text-orange-500">FOR HONOR RANKED</h1>
             </div>
             <h2 className="text-2xl font-bold text-white mb-2">Criar Conta</h2>
             <p className="text-gray-400">
@@ -104,7 +105,7 @@ export default function RegisterPage() {
                     onChange={handleChange}
                     required
                     minLength={3}
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                     placeholder="Seu nickname único"
                   />
                   <p className="text-gray-500 text-sm mt-1">
@@ -124,7 +125,7 @@ export default function RegisterPage() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                     placeholder="seu.email@ubisoft.com"
                   />
                   <p className="text-gray-500 text-sm mt-1">
@@ -146,7 +147,7 @@ export default function RegisterPage() {
                       onChange={handleChange}
                       required
                       minLength={6}
-                      className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent pr-12"
+                      className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent pr-12"
                       placeholder="Mínimo 6 caracteres"
                     />
                     <button
@@ -173,7 +174,7 @@ export default function RegisterPage() {
                       onChange={handleChange}
                       required
                       minLength={6}
-                      className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent pr-12"
+                      className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent pr-12"
                       placeholder="Digite a senha novamente"
                     />
                     <button
@@ -198,7 +199,7 @@ export default function RegisterPage() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-3 bg-amber-600 hover:bg-amber-700 disabled:bg-gray-700 text-white font-bold rounded-lg transition-colors flex items-center justify-center gap-2"
+                  className="w-full py-3 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 disabled:bg-gray-700 text-white font-bold rounded-lg transition-colors flex items-center justify-center gap-2"
                 >
                   {isLoading ? (
                     <>
@@ -218,7 +219,7 @@ export default function RegisterPage() {
                 <p className="text-gray-400 mb-4">
                   Sua conta foi criada com sucesso. Redirecionando para o dashboard...
                 </p>
-                <div className="w-8 h-8 border-2 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto" />
+                <div className="w-8 h-8 border-2 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto" />
               </div>
             )}
 
@@ -227,7 +228,7 @@ export default function RegisterPage() {
               <div className="mt-6 text-center">
                 <p className="text-gray-400">
                   Já tem uma conta?{' '}
-                  <Link href="/login" className="text-amber-500 hover:text-amber-400 transition-colors">
+                  <Link href="/login" className="text-orange-500 hover:text-orange-400 transition-colors">
                     Entrar
                   </Link>
                 </p>
@@ -236,6 +237,7 @@ export default function RegisterPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

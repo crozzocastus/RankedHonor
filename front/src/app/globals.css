@@ -1,5 +1,28 @@
 @import "tailwindcss";
 
+/**
+ * RankedHonor Color System
+ * 
+ * Primary Brand Colors:
+ * - orange-500 to red-600: Primary UI color for CTAs, buttons, and brand elements
+ *   Example: bg-gradient-to-r from-orange-500 to-red-600
+ * 
+ * Rank & Status Colors:
+ * - yellow-500: Ranking indicators (Gold tier, trophies, #1 positions)
+ * - green-500: Active status, online players, success states
+ * - cyan-500: Advanced ranks (Diamond, Master)
+ * - purple-500: Elite ranks (Grandmaster, Champion)
+ * - orange-600: Bronze tier
+ * 
+ * Deprecated:
+ * - amber-*: DO NOT USE - being replaced with orange-* for consistency
+ * 
+ * Usage Examples:
+ * - Primary buttons: bg-orange-600 hover:bg-orange-700
+ * - Hero CTAs: bg-gradient-to-r from-orange-500 to-red-600
+ * - Borders/accents: border-orange-500/20, text-orange-500
+ */
+
 @theme inline {
   --color-background: #ffffff;
   --color-foreground: oklch(0.145 0 0);

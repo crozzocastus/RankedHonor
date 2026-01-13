@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Navbar } from '@/components/layout/Navbar';
+import { Footer } from '@/components/layout/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -54,12 +55,12 @@ export default function RankedPage() {
 
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
+    <div className="min-h-screen bg-black text-white">
       <Navbar />
 
-      <div className="container mx-auto px-6 py-12 max-w-4xl">
+      <div className="container mx-auto px-6 py-12 max-w-[1440px]">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-amber-500 mb-4">
+          <h1 className="text-4xl font-bold text-orange-500 mb-4">
             Buscar Partida Ranqueada
           </h1>
           <p className="text-slate-400">
@@ -69,7 +70,7 @@ export default function RankedPage() {
 
         <Card className="bg-slate-900 border-slate-700">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-amber-500">
+            <CardTitle className="flex items-center gap-2 text-orange-500">
               <Swords className="w-5 h-5" />
               Configurações da Partida
             </CardTitle>
@@ -117,7 +118,7 @@ export default function RankedPage() {
               <Button
                 onClick={handleSearch}
                 disabled={!selectedMode || isSearching}
-                className="px-8 py-3 bg-amber-600 hover:bg-amber-700 disabled:bg-slate-600"
+                className="px-8 py-3 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 disabled:bg-slate-600"
               >
                 {isSearching ? (
                   <>
@@ -141,6 +142,7 @@ export default function RankedPage() {
           </CardContent>
         </Card>
       </div>
+      <Footer />
     </div>
   );
 }

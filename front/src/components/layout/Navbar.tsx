@@ -41,20 +41,22 @@ export function Navbar({ onContentClick, onStatsClick }: NavbarProps) {
   };
 
   return (
-    <nav className="bg-slate-900 border-b border-amber-600/30">
+    <nav className="sticky top-0 z-50 bg-black/95 backdrop-blur-sm border-b border-orange-500/20">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           {/* Logo - sempre visível */}
           <div className="flex items-center gap-3 cursor-pointer" onClick={handleHomeClick}>
-            <Sword className="w-8 h-8 text-amber-500" />
-            <span className="text-amber-500 font-bold">FOR HONOR RANKED</span>
+            <div className="bg-gradient-to-br from-orange-500 to-red-600 p-2 rounded-lg">
+              <Sword className="w-6 h-6 text-white" />
+            </div>
+            <span className="text-orange-500 font-bold">FOR HONOR RANKED</span>
           </div>
 
           {/* Navegação central - mantida consistente */}
           <div className="hidden md:flex items-center gap-4">
             <button
               onClick={handleHomeClick}
-              className="flex items-center gap-2 px-4 py-2 text-slate-300 hover:text-amber-500 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 text-slate-300 hover:text-orange-500 transition-colors"
             >
               <Home className="w-4 h-4" />
               Início
@@ -62,7 +64,7 @@ export function Navbar({ onContentClick, onStatsClick }: NavbarProps) {
             
             <button
               onClick={onContentClick}
-              className="flex items-center gap-2 px-4 py-2 text-slate-300 hover:text-amber-500 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 text-slate-300 hover:text-orange-500 transition-colors"
             >
               <Radio className="w-4 h-4" />
               Conteúdo
@@ -70,7 +72,7 @@ export function Navbar({ onContentClick, onStatsClick }: NavbarProps) {
             
             <button
               onClick={onStatsClick}
-              className="flex items-center gap-2 px-4 py-2 text-slate-300 hover:text-amber-500 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 text-slate-300 hover:text-orange-500 transition-colors"
             >
               <BarChart3 className="w-4 h-4" />
               Rankings
@@ -78,7 +80,7 @@ export function Navbar({ onContentClick, onStatsClick }: NavbarProps) {
             
             <button
               onClick={() => user ? router.push('/ranked') : router.push('/login')}
-              className="flex items-center gap-2 px-4 py-2 text-slate-300 hover:text-amber-500 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 text-slate-300 hover:text-orange-500 transition-colors"
             >
               <Sword className="w-4 h-4" />
               Ranqueada
@@ -104,7 +106,7 @@ export function Navbar({ onContentClick, onStatsClick }: NavbarProps) {
                   onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
                   className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-600 rounded transition-colors"
                 >
-                  <div className="w-5 h-5 bg-amber-500 rounded-full flex items-center justify-center">
+                  <div className="w-5 h-5 bg-orange-500 rounded-full flex items-center justify-center">
                     <span className="text-black text-xs font-bold">{user.nickname[0].toUpperCase()}</span>
                   </div>
                   <span className="hidden sm:inline">{user.nickname}</span>
@@ -150,7 +152,7 @@ export function Navbar({ onContentClick, onStatsClick }: NavbarProps) {
                 </button>
                 <button
                   onClick={() => router.push('/register')}
-                  className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-slate-900 rounded transition-colors"
+                  className="px-4 py-2 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-semibold rounded transition-colors"
                 >
                   Criar conta
                 </button>

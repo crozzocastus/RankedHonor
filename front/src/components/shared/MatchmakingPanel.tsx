@@ -49,8 +49,8 @@ export function MatchmakingPanel({ currentUser, onLoginRequired }: MatchmakingPa
   return (
     <div className="bg-slate-900 rounded-lg border border-slate-800 p-6 sticky top-4">
       <div className="flex items-center gap-2 mb-6">
-        <Swords className="w-5 h-5 text-amber-500" />
-        <h2 className="text-amber-500">MATCHMAKING</h2>
+        <Swords className="w-5 h-5 text-orange-500" />
+        <h2 className="text-orange-500">MATCHMAKING</h2>
       </div>
 
       {currentUser ? (
@@ -78,7 +78,7 @@ export function MatchmakingPanel({ currentUser, onLoginRequired }: MatchmakingPa
 
           <div className="p-4 bg-slate-800/50 rounded border border-slate-700">
             <div className="text-slate-400 mb-2">Seu Rank Atual</div>
-            <div className="text-amber-500">{currentUser.rank}</div>
+            <div className="text-orange-500">{currentUser.rank}</div>
             <div className="text-slate-500 mt-1">
               {currentUser.wins}W / {currentUser.losses}L
             </div>
@@ -87,7 +87,7 @@ export function MatchmakingPanel({ currentUser, onLoginRequired }: MatchmakingPa
           <div className="p-4 bg-slate-800/50 rounded border border-slate-700">
             <div className="text-slate-400 mb-2">Herói Principal</div>
             <div className="flex items-center gap-2">
-              <Shield className="w-4 h-4 text-amber-500" />
+              <Shield className="w-4 h-4 text-orange-500" />
               <span className="text-slate-200">{currentUser.mainHero}</span>
             </div>
             <div className="text-slate-500 mt-1">Nível {currentUser.level}</div>
@@ -95,9 +95,9 @@ export function MatchmakingPanel({ currentUser, onLoginRequired }: MatchmakingPa
 
           {isSearching ? (
             <div className="space-y-4">
-              <div className="p-6 bg-amber-900/20 border border-amber-600/50 rounded text-center">
-                <Loader2 className="w-8 h-8 text-amber-500 animate-spin mx-auto mb-3" />
-                <div className="text-amber-500 mb-2">Procurando adversário...</div>
+              <div className="p-6 bg-orange-900/20 border border-orange-600/50 rounded text-center">
+                <Loader2 className="w-8 h-8 text-orange-500 animate-spin mx-auto mb-3" />
+                <div className="text-orange-500 mb-2">Procurando adversário...</div>
                 <div className="flex items-center justify-center gap-2 text-slate-400">
                   <Clock className="w-4 h-4" />
                   {Math.floor(searchTime / 60)}:{(searchTime % 60).toString().padStart(2, '0')}
@@ -113,7 +113,7 @@ export function MatchmakingPanel({ currentUser, onLoginRequired }: MatchmakingPa
           ) : (
             <button
               onClick={startSearch}
-              className="w-full py-3 bg-amber-600 hover:bg-amber-700 text-slate-900 rounded transition-colors flex items-center justify-center gap-2"
+              className="w-full py-3 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-semibold rounded transition-colors flex items-center justify-center gap-2"
             >
               <Swords className="w-5 h-5" />
               Buscar Partida Ranqueada
@@ -142,7 +142,7 @@ export function MatchmakingPanel({ currentUser, onLoginRequired }: MatchmakingPa
           </p>
           <button
             onClick={onLoginRequired}
-            className="px-6 py-2 bg-amber-600 hover:bg-amber-700 text-slate-900 rounded transition-colors"
+            className="px-6 py-2 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-semibold rounded transition-colors"
           >
             Fazer Login
           </button>
