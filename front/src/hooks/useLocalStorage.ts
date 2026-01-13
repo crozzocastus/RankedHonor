@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 /**
  * Custom hook for managing localStorage with type safety
@@ -8,7 +8,10 @@ import { useState, useEffect } from 'react';
  * @param initialValue - initial value if key doesn't exist
  * @returns [storedValue, setValue]
  */
-export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T | ((val: T) => T)) => void] {
+export function useLocalStorage<T>(
+  key: string,
+  initialValue: T
+): [T, (value: T | ((val: T) => T)) => void] {
   const [storedValue, setStoredValue] = useState<T>(initialValue);
   const [isHydrated, setIsHydrated] = useState(false);
 
@@ -30,7 +33,7 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T 
     try {
       const valueToStore = value instanceof Function ? value(storedValue) : value;
       setStoredValue(valueToStore);
-      if (typeof window !== 'undefined') {
+      if (typeof window !== "undefined") {
         if (valueToStore === null) {
           window.localStorage.removeItem(key);
         } else {

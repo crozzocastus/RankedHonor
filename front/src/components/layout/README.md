@@ -5,7 +5,9 @@
 This directory contains structural layout components that define the page structure and navigation.
 
 ### Purpose
+
 Layout components provide the structural foundation for pages:
+
 - Define page structure and navigation
 - Ensure consistent layout across pages
 - Handle responsive design
@@ -18,12 +20,13 @@ Layout components provide the structural foundation for pages:
 - **Navbar.tsx** - Primary navigation component
 
 ### Usage
+
 Layout components are typically used in Next.js layout files:
 
 ```tsx
 // app/layout.tsx or app/(dashboard)/layout.tsx
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 
 export default function Layout({ children }) {
   return (
@@ -37,6 +40,7 @@ export default function Layout({ children }) {
 ```
 
 ### Best Practices
+
 - Keep layout components focused on structure
 - Handle responsive design with mobile-first approach
 - Use semantic HTML elements (header, nav, footer, main)
@@ -50,7 +54,9 @@ export default function Layout({ children }) {
 Este diretório contém componentes de layout estrutural que definem a estrutura da página e navegação.
 
 ### Propósito
+
 Componentes de layout fornecem a fundação estrutural para páginas:
+
 - Definem estrutura de página e navegação
 - Garantem layout consistente entre páginas
 - Lidam com design responsivo
@@ -63,12 +69,13 @@ Componentes de layout fornecem a fundação estrutural para páginas:
 - **Navbar.tsx** - Componente de navegação primária
 
 ### Uso
+
 Componentes de layout são tipicamente usados em arquivos de layout do Next.js:
 
 ```tsx
 // app/layout.tsx ou app/(dashboard)/layout.tsx
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 
 export default function Layout({ children }) {
   return (
@@ -82,6 +89,7 @@ export default function Layout({ children }) {
 ```
 
 ### Boas Práticas
+
 - Mantenha componentes de layout focados em estrutura
 - Lide com design responsivo com abordagem mobile-first
 - Use elementos HTML semânticos (header, nav, footer, main)

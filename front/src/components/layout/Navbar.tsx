@@ -1,9 +1,19 @@
-'use client';
+"use client";
 
-import { Sword, User, LogOut, Home, Download, Radio, BarChart3, ChevronDown, Settings } from 'lucide-react';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { useAuth } from '@/contexts/AuthContext';
+import {
+  Sword,
+  User,
+  LogOut,
+  Home,
+  Download,
+  Radio,
+  BarChart3,
+  ChevronDown,
+  Settings,
+} from "lucide-react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface NavbarProps {
   onContentClick?: () => void;
@@ -16,73 +26,75 @@ export function Navbar({ onContentClick, onStatsClick }: NavbarProps) {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
   const handleDownloadLauncher = () => {
-    alert('Download do For Honor Ranked Launcher iniciado!\n\nO launcher é necessário para registrar suas partidas automaticamente no sistema de ranqueada.');
+    alert(
+      "Download do For Honor Ranked Launcher iniciado!\n\nO launcher é necessário para registrar suas partidas automaticamente no sistema de ranqueada."
+    );
   };
 
   const handleHomeClick = () => {
     // Redireciona para home pública ou dashboard dependendo do estado de autenticação
-    router.push(user ? '/dashboard' : '/');
+    router.push(user ? "/dashboard" : "/");
   };
 
   const handleProfileClick = () => {
     setIsProfileMenuOpen(false);
-    router.push('/profile');
+    router.push("/profile");
   };
 
   const handleSettingsClick = () => {
     setIsProfileMenuOpen(false);
-    alert('Configurações do perfil');
+    alert("Configurações do perfil");
   };
 
   const handleLogoutClick = () => {
     setIsProfileMenuOpen(false);
     logout();
-    router.push('/');
+    router.push("/");
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-black/95 backdrop-blur-sm border-b border-orange-500/20">
+    <nav className="sticky top-0 z-50 border-b border-orange-500/20 bg-black/95 backdrop-blur-sm">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex h-20 items-center justify-between">
           {/* Logo - sempre visível */}
-          <div className="flex items-center gap-3 cursor-pointer" onClick={handleHomeClick}>
-            <div className="bg-gradient-to-br from-orange-500 to-red-600 p-2 rounded-lg">
-              <Sword className="w-6 h-6 text-white" />
+          <div className="flex cursor-pointer items-center gap-3" onClick={handleHomeClick}>
+            <div className="rounded-lg bg-gradient-to-br from-orange-500 to-red-600 p-2">
+              <Sword className="h-6 w-6 text-white" />
             </div>
-            <span className="text-orange-500 font-bold">FOR HONOR RANKED</span>
+            <span className="font-bold text-orange-500">FOR HONOR RANKED</span>
           </div>
 
           {/* Navegação central - mantida consistente */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden items-center gap-4 md:flex">
             <button
               onClick={handleHomeClick}
-              className="flex items-center gap-2 px-4 py-2 text-slate-300 hover:text-orange-500 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 text-slate-300 transition-colors hover:text-orange-500"
             >
-              <Home className="w-4 h-4" />
+              <Home className="h-4 w-4" />
               Início
             </button>
-            
+
             <button
               onClick={onContentClick}
-              className="flex items-center gap-2 px-4 py-2 text-slate-300 hover:text-orange-500 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 text-slate-300 transition-colors hover:text-orange-500"
             >
-              <Radio className="w-4 h-4" />
+              <Radio className="h-4 w-4" />
               Conteúdo
             </button>
-            
+
             <button
               onClick={onStatsClick}
-              className="flex items-center gap-2 px-4 py-2 text-slate-300 hover:text-orange-500 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 text-slate-300 transition-colors hover:text-orange-500"
             >
-              <BarChart3 className="w-4 h-4" />
+              <BarChart3 className="h-4 w-4" />
               Rankings
             </button>
-            
+
             <button
-              onClick={() => user ? router.push('/ranked') : router.push('/login')}
-              className="flex items-center gap-2 px-4 py-2 text-slate-300 hover:text-orange-500 transition-colors"
+              onClick={() => (user ? router.push("/ranked") : router.push("/login"))}
+              className="flex items-center gap-2 px-4 py-2 text-slate-300 transition-colors hover:text-orange-500"
             >
-              <Sword className="w-4 h-4" />
+              <Sword className="h-4 w-4" />
               Ranqueada
             </button>
           </div>
@@ -92,50 +104,52 @@ export function Navbar({ onContentClick, onStatsClick }: NavbarProps) {
             {/* Download Launcher - sempre visível */}
             <button
               onClick={handleDownloadLauncher}
-              className="flex items-center gap-2 px-4 py-2 bg-green-700/30 hover:bg-green-700/50 text-green-400 border border-green-600/30 rounded transition-colors"
+              className="flex items-center gap-2 rounded border border-green-600/30 bg-green-700/30 px-4 py-2 text-green-400 transition-colors hover:bg-green-700/50"
             >
-              <Download className="w-4 h-4" />
+              <Download className="h-4 w-4" />
               <span className="hidden sm:inline">Baixar Launcher</span>
             </button>
-            
+
             {/* Área de autenticação - mantém mesma estrutura visual */}
             {user ? (
               /* Avatar e menu dropdown - mesmo tamanho e posição dos botões originais */
               <div className="relative">
                 <button
                   onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
-                  className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-600 rounded transition-colors"
+                  className="flex items-center gap-2 rounded border border-slate-600 bg-slate-800 px-4 py-2 text-slate-300 transition-colors hover:bg-slate-700"
                 >
-                  <div className="w-5 h-5 bg-orange-500 rounded-full flex items-center justify-center">
-                    <span className="text-black text-xs font-bold">{user.nickname[0].toUpperCase()}</span>
+                  <div className="flex h-5 w-5 items-center justify-center rounded-full bg-orange-500">
+                    <span className="text-xs font-bold text-black">
+                      {user.nickname[0].toUpperCase()}
+                    </span>
                   </div>
                   <span className="hidden sm:inline">{user.nickname}</span>
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className="h-4 w-4" />
                 </button>
 
                 {/* Dropdown menu */}
                 {isProfileMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-slate-800 border border-slate-700 rounded-lg shadow-lg z-50">
+                  <div className="absolute right-0 z-50 mt-2 w-48 rounded-lg border border-slate-700 bg-slate-800 shadow-lg">
                     <button
                       onClick={handleProfileClick}
-                      className="w-full px-4 py-3 text-left text-slate-300 hover:bg-slate-700 transition-colors flex items-center gap-2"
+                      className="flex w-full items-center gap-2 px-4 py-3 text-left text-slate-300 transition-colors hover:bg-slate-700"
                     >
-                      <User className="w-4 h-4" />
+                      <User className="h-4 w-4" />
                       Perfil
                     </button>
                     <button
                       onClick={handleSettingsClick}
-                      className="w-full px-4 py-3 text-left text-slate-300 hover:bg-slate-700 transition-colors flex items-center gap-2"
+                      className="flex w-full items-center gap-2 px-4 py-3 text-left text-slate-300 transition-colors hover:bg-slate-700"
                     >
-                      <Settings className="w-4 h-4" />
+                      <Settings className="h-4 w-4" />
                       Configurações
                     </button>
                     <hr className="border-slate-700" />
                     <button
                       onClick={handleLogoutClick}
-                      className="w-full px-4 py-3 text-left text-red-400 hover:bg-slate-700 transition-colors flex items-center gap-2"
+                      className="flex w-full items-center gap-2 px-4 py-3 text-left text-red-400 transition-colors hover:bg-slate-700"
                     >
-                      <LogOut className="w-4 h-4" />
+                      <LogOut className="h-4 w-4" />
                       Sair
                     </button>
                   </div>
@@ -145,14 +159,14 @@ export function Navbar({ onContentClick, onStatsClick }: NavbarProps) {
               /* Botões de login/registro - mantém layout visual consistente */
               <div className="flex items-center gap-2">
                 <button
-                  onClick={() => router.push('/login')}
-                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-600 rounded transition-colors"
+                  onClick={() => router.push("/login")}
+                  className="rounded border border-slate-600 bg-slate-800 px-4 py-2 text-slate-300 transition-colors hover:bg-slate-700"
                 >
                   Entrar
                 </button>
                 <button
-                  onClick={() => router.push('/register')}
-                  className="px-4 py-2 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-semibold rounded transition-colors"
+                  onClick={() => router.push("/register")}
+                  className="rounded bg-gradient-to-r from-orange-500 to-red-600 px-4 py-2 font-semibold text-white transition-colors hover:from-orange-600 hover:to-red-700"
                 >
                   Criar conta
                 </button>

@@ -5,7 +5,9 @@
 This directory contains application-wide constant values organized by domain.
 
 ### Purpose
+
 Constants provide:
+
 - Single source of truth for fixed values
 - Easy maintenance and updates
 - Type safety for configuration values
@@ -36,14 +38,15 @@ Constants provide:
    - Export types alongside constants when needed
 
 ### Example
+
 ```typescript
 // auth.constants.ts
-export const AUTH_STORAGE_KEY = 'forHonorUser';
+export const AUTH_STORAGE_KEY = "forHonorUser";
 export const AUTH_SESSION_TIMEOUT = 24 * 60 * 60 * 1000; // 24 hours
 
 // game.constants.ts
-export const GAME_MODES = ['Duel', 'Brawl', 'Dominion'] as const;
-export type GameMode = typeof GAME_MODES[number];
+export const GAME_MODES = ["Duel", "Brawl", "Dominion"] as const;
+export type GameMode = (typeof GAME_MODES)[number];
 
 export const MAX_PLAYERS = {
   Duel: 2,
@@ -59,7 +62,9 @@ export const MAX_PLAYERS = {
 Este diretório contém valores constantes da aplicação organizados por domínio.
 
 ### Propósito
+
 Constantes fornecem:
+
 - Fonte única de verdade para valores fixos
 - Fácil manutenção e atualizações
 - Type safety para valores de configuração
@@ -90,14 +95,15 @@ Constantes fornecem:
    - Exporte tipos junto com constantes quando necessário
 
 ### Exemplo
+
 ```typescript
 // auth.constants.ts
-export const AUTH_STORAGE_KEY = 'forHonorUser';
+export const AUTH_STORAGE_KEY = "forHonorUser";
 export const AUTH_SESSION_TIMEOUT = 24 * 60 * 60 * 1000; // 24 horas
 
 // game.constants.ts
-export const GAME_MODES = ['Duelo', 'Briga', 'Domínio'] as const;
-export type GameMode = typeof GAME_MODES[number];
+export const GAME_MODES = ["Duelo", "Briga", "Domínio"] as const;
+export type GameMode = (typeof GAME_MODES)[number];
 
 export const MAX_PLAYERS = {
   Duelo: 2,

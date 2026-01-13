@@ -5,7 +5,9 @@
 This directory contains all components specific to the landing/home page.
 
 ### Purpose
+
 Landing components create the marketing and promotional sections of the home page:
+
 - Showcase product features and benefits
 - Engage visitors and encourage sign-ups
 - Provide information about the game/platform
@@ -26,18 +28,21 @@ Landing components create the marketing and promotional sections of the home pag
 - **Sidebar.tsx** - Landing page sidebar with widgets
 
 ### Organization
+
 Each component represents a distinct section of the landing page, making it easy to:
+
 - Reorder sections
 - A/B test different layouts
 - Maintain and update individual sections
 - Reuse components on other marketing pages
 
 ### Usage Example
+
 ```tsx
 // app/page.tsx (Landing Page)
-import { HeroSection } from '@/components/landing/HeroSection';
-import { GameModes } from '@/components/landing/GameModes';
-import { RankingsSection } from '@/components/landing/RankingsSection';
+import { HeroSection } from "@/components/landing/HeroSection";
+import { GameModes } from "@/components/landing/GameModes";
+import { RankingsSection } from "@/components/landing/RankingsSection";
 
 export default function LandingPage() {
   return (
@@ -58,7 +63,9 @@ export default function LandingPage() {
 Este diretório contém todos os componentes específicos da página inicial/landing.
 
 ### Propósito
+
 Componentes de landing criam as seções de marketing e promocionais da página inicial:
+
 - Mostrar recursos e benefícios do produto
 - Engajar visitantes e encorajar cadastros
 - Fornecer informações sobre o jogo/plataforma
@@ -79,18 +86,21 @@ Componentes de landing criam as seções de marketing e promocionais da página 
 - **Sidebar.tsx** - Sidebar da landing page com widgets
 
 ### Organização
+
 Cada componente representa uma seção distinta da landing page, facilitando:
+
 - Reordenar seções
 - Fazer testes A/B de diferentes layouts
 - Manter e atualizar seções individuais
 - Reutilizar componentes em outras páginas de marketing
 
 ### Exemplo de Uso
+
 ```tsx
 // app/page.tsx (Landing Page)
-import { HeroSection } from '@/components/landing/HeroSection';
-import { GameModes } from '@/components/landing/GameModes';
-import { RankingsSection } from '@/components/landing/RankingsSection';
+import { HeroSection } from "@/components/landing/HeroSection";
+import { GameModes } from "@/components/landing/GameModes";
+import { RankingsSection } from "@/components/landing/RankingsSection";
 
 export default function LandingPage() {
   return (

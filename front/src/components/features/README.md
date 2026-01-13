@@ -5,7 +5,9 @@
 This directory contains feature-specific components organized by business domain.
 
 ### Purpose
+
 Feature components encapsulate specific functionality and business logic related to core application features. They:
+
 - Contain business logic specific to a feature
 - May use multiple UI components
 - Can manage local state and side effects
@@ -18,13 +20,16 @@ Feature components encapsulate specific functionality and business logic related
 - **ranking/** - Ranking and leaderboard components
 
 ### When to Use
+
 Create feature components when:
+
 - Logic is specific to a business domain
 - Component needs feature-specific state management
 - You're combining multiple UI components for a feature
 - Component implements specific business rules
 
 ### Example Structure
+
 ```
 features/
   auth/
@@ -47,7 +52,9 @@ features/
 Este diretório contém componentes específicos de features organizados por domínio de negócio.
 
 ### Propósito
+
 Componentes de features encapsulam funcionalidade específica e lógica de negócio relacionada às features principais da aplicação. Eles:
+
 - Contêm lógica de negócio específica de uma feature
 - Podem usar múltiplos componentes UI
 - Podem gerenciar estado local e efeitos colaterais
@@ -60,13 +67,16 @@ Componentes de features encapsulam funcionalidade específica e lógica de negó
 - **ranking/** - Componentes de ranking e tabelas de líderes
 
 ### Quando Usar
+
 Crie componentes de features quando:
+
 - A lógica é específica de um domínio de negócio
 - O componente precisa de gerenciamento de estado específico da feature
 - Você está combinando múltiplos componentes UI para uma feature
 - O componente implementa regras de negócio específicas
 
 ### Exemplo de Estrutura
+
 ```
 features/
   auth/

@@ -5,7 +5,9 @@
 This directory contains service layer modules that handle business logic and API interactions.
 
 ### Purpose
+
 Services provide:
+
 - Abstraction layer between components and data sources
 - Business logic implementation
 - API call encapsulation
@@ -38,15 +40,13 @@ Services provide:
    - Consistent interface regardless of data source
 
 ### Example Service Structure
+
 ```typescript
 // services/auth.service.ts
-export async function loginUser(
-  nickname: string,
-  password: string
-): Promise<User | null> {
+export async function loginUser(nickname: string, password: string): Promise<User | null> {
   // API call or mock implementation
-  const response = await fetch('/api/login', {
-    method: 'POST',
+  const response = await fetch("/api/login", {
+    method: "POST",
     body: JSON.stringify({ nickname, password }),
   });
   return response.json();
@@ -54,14 +54,15 @@ export async function loginUser(
 
 export function getSavedUser(): User | null {
   // LocalStorage operations
-  const data = localStorage.getItem('user');
+  const data = localStorage.getItem("user");
   return data ? JSON.parse(data) : null;
 }
 ```
 
 ### Usage in Components
+
 ```tsx
-import { loginUser } from '@/services/auth.service';
+import { loginUser } from "@/services/auth.service";
 
 function LoginComponent() {
   const handleLogin = async () => {
@@ -80,7 +81,9 @@ function LoginComponent() {
 Este diretório contém módulos de camada de serviço que lidam com lógica de negócio e interações com API.
 
 ### Propósito
+
 Serviços fornecem:
+
 - Camada de abstração entre componentes e fontes de dados
 - Implementação de lógica de negócio
 - Encapsulamento de chamadas de API
@@ -113,15 +116,13 @@ Serviços fornecem:
    - Interface consistente independente da fonte de dados
 
 ### Exemplo de Estrutura de Serviço
+
 ```typescript
 // services/auth.service.ts
-export async function loginUser(
-  nickname: string,
-  password: string
-): Promise<User | null> {
+export async function loginUser(nickname: string, password: string): Promise<User | null> {
   // Chamada de API ou implementação mock
-  const response = await fetch('/api/login', {
-    method: 'POST',
+  const response = await fetch("/api/login", {
+    method: "POST",
     body: JSON.stringify({ nickname, password }),
   });
   return response.json();
@@ -129,14 +130,15 @@ export async function loginUser(
 
 export function getSavedUser(): User | null {
   // Operações de LocalStorage
-  const data = localStorage.getItem('user');
+  const data = localStorage.getItem("user");
   return data ? JSON.parse(data) : null;
 }
 ```
 
 ### Uso em Componentes
+
 ```tsx
-import { loginUser } from '@/services/auth.service';
+import { loginUser } from "@/services/auth.service";
 
 function LoginComponent() {
   const handleLogin = async () => {

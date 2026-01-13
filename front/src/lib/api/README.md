@@ -5,7 +5,9 @@
 This directory contains API client configuration and related utilities.
 
 ### Purpose
+
 The API directory centralizes:
+
 - HTTP client setup (Axios, Fetch, etc.)
 - Base URL configuration
 - Request/response interceptors
@@ -29,21 +31,22 @@ The API directory centralizes:
    - Type-safe endpoint builders
 
 ### Example Setup
+
 ```typescript
 // lib/api/client.ts
-import axios from 'axios';
+import axios from "axios";
 
 export const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   timeout: 10000,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
 // Add auth token to requests
 apiClient.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -58,7 +61,9 @@ apiClient.interceptors.request.use((config) => {
 Este diretório contém configuração do cliente API e utilitários relacionados.
 
 ### Propósito
+
 O diretório API centraliza:
+
 - Setup de cliente HTTP (Axios, Fetch, etc.)
 - Configuração de URL base
 - Interceptadores de request/response
@@ -82,21 +87,22 @@ O diretório API centraliza:
    - Construtores de endpoints type-safe
 
 ### Exemplo de Setup
+
 ```typescript
 // lib/api/client.ts
-import axios from 'axios';
+import axios from "axios";
 
 export const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   timeout: 10000,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
 // Adicionar token de auth às requisições
 apiClient.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }

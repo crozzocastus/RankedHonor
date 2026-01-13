@@ -1,36 +1,135 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RankedHonor - Frontend
 
-## Getting Started
+![CI Frontend](https://github.com/crozzo/RankedHonor/actions/workflows/ci-frontend.yml/badge.svg)
+![Security](https://github.com/crozzo/RankedHonor/actions/workflows/security.yml/badge.svg)
+![CD Frontend](https://github.com/crozzo/RankedHonor/actions/workflows/cd-frontend.yml/badge.svg)
 
-First, run the development server:
+Frontend do RankedHonor - Plataforma de jogos competitivos com ranking e matchmaking.
+
+## 🚀 Tech Stack
+
+- **Framework:** Next.js 16.1.1 (App Router)
+- **Runtime:** React 19.2.3
+- **Language:** TypeScript 5.x
+- **Styling:** Tailwind CSS 4.x
+- **UI Components:** Radix UI
+- **Testing:** Vitest + React Testing Library
+- **Code Quality:** ESLint, Prettier, Husky
+
+## 📦 Getting Started
+
+### Prerequisites
+
+- Node.js 20.x ou superior
+- npm, yarn, pnpm ou bun
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Instalar dependências
+npm install
+
+# Copiar arquivo de ambiente
+cp .env.example .env
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Iniciar servidor de desenvolvimento
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Abra [http://localhost:3000](http://localhost:3000) no navegador.
 
-## Learn More
+### Build
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+# Build de produção
+npm run build
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Iniciar servidor de produção
+npm run start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🧪 Testing
 
-## Deploy on Vercel
+```bash
+# Rodar testes
+npm run test
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Testes em modo watch
+npm run test:watch
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Testes com cobertura
+npm run test:coverage
+```
+
+## 🎨 Code Quality
+
+```bash
+# Linting
+npm run lint
+
+# Formatação (escrever)
+npm run format
+
+# Formatação (verificar apenas)
+npm run format:check
+
+# Type checking
+npm run type-check
+```
+
+## 🔧 Git Hooks
+
+O projeto usa Husky para git hooks automáticos:
+
+- **pre-commit:** Roda lint-staged (ESLint + Prettier em arquivos modificados)
+
+## 📁 Project Structure
+
+```
+front/
+├── .github/          # GitHub Actions workflows
+├── .husky/           # Git hooks
+├── public/           # Assets estáticos
+├── src/
+│   ├── app/          # Next.js App Router
+│   ├── components/   # Componentes React
+│   ├── contexts/     # React Contexts
+│   ├── hooks/        # Custom hooks
+│   ├── lib/          # Bibliotecas e configurações
+│   ├── services/     # API services
+│   ├── types/        # TypeScript types
+│   └── utils/        # Utilitários
+├── vitest.config.ts  # Configuração Vitest
+└── package.json
+```
+
+## 🌍 Environment Variables
+
+Veja [.env.example](.env.example) para todas as variáveis disponíveis.
+
+**Principais:**
+- `NEXT_PUBLIC_APP_NAME` - Nome da aplicação
+- `NEXT_PUBLIC_API_URL` - URL base da API backend
+
+## 📚 Learn More
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [React Documentation](https://react.dev)
+- [Tailwind CSS](https://tailwindcss.com/docs)
+- [Radix UI](https://www.radix-ui.com/primitives/docs/overview/introduction)
+
+## 🚢 Deploy
+
+Deploy automático via GitHub Actions para Vercel em push para `main`.
+
+Para deploy manual:
+```bash
+npm run build
+```
+
+Consulte [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) para mais detalhes.
+

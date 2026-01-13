@@ -5,7 +5,9 @@
 This directory contains library configurations, third-party integrations, and utility modules.
 
 ### Purpose
+
 The `lib/` directory is for:
+
 - Configuring external libraries and SDKs
 - Setting up third-party service integrations
 - Creating wrappers around external APIs
@@ -38,6 +40,7 @@ The `lib/` directory is for:
    - Magic numbers and strings
 
 ### Example Structure
+
 ```
 lib/
   api/
@@ -57,7 +60,9 @@ lib/
 Este diretório contém configurações de bibliotecas, integrações de terceiros e módulos utilitários.
 
 ### Propósito
+
 O diretório `lib/` é para:
+
 - Configurar bibliotecas externas e SDKs
 - Configurar integrações de serviços terceiros
 - Criar wrappers em torno de APIs externas
@@ -90,6 +95,7 @@ O diretório `lib/` é para:
    - Números e strings mágicas
 
 ### Exemplo de Estrutura
+
 ```
 lib/
   api/

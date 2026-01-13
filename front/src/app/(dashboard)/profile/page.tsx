@@ -1,33 +1,46 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { useAuth } from '@/contexts/AuthContext';
-import { Navbar } from '@/components/layout/Navbar';
-import { Footer } from '@/components/layout/Footer';
-import { User, Shield, Trophy, Target, Swords, Users, Crown, Medal, Award, Settings, Eye, EyeOff } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import {
+  User,
+  Shield,
+  Trophy,
+  Target,
+  Swords,
+  Users,
+  Crown,
+  Medal,
+  Award,
+  Settings,
+  Eye,
+  EyeOff,
+} from "lucide-react";
 
 // Mock de avatares de heróis do For Honor
 const heroAvatars = [
-  { id: 'warden', name: 'Warden', faction: 'Knights' },
-  { id: 'raider', name: 'Raider', faction: 'Vikings' },
-  { id: 'orochi', name: 'Orochi', faction: 'Samurai' },
-  { id: 'conqueror', name: 'Conqueror', faction: 'Knights' },
-  { id: 'berzerker', name: 'Berzerker', faction: 'Vikings' },
-  { id: 'kensei', name: 'Kensei', faction: 'Samurai' },
-  { id: 'peacekeeper', name: 'Peacekeeper', faction: 'Knights' },
-  { id: 'valkyrie', name: 'Valkyrie', faction: 'Vikings' },
-  { id: 'shugoki', name: 'Shugoki', faction: 'Samurai' }
+  { id: "warden", name: "Warden", faction: "Knights" },
+  { id: "raider", name: "Raider", faction: "Vikings" },
+  { id: "orochi", name: "Orochi", faction: "Samurai" },
+  { id: "conqueror", name: "Conqueror", faction: "Knights" },
+  { id: "berzerker", name: "Berzerker", faction: "Vikings" },
+  { id: "kensei", name: "Kensei", faction: "Samurai" },
+  { id: "peacekeeper", name: "Peacekeeper", faction: "Knights" },
+  { id: "valkyrie", name: "Valkyrie", faction: "Vikings" },
+  { id: "shugoki", name: "Shugoki", faction: "Samurai" },
 ];
 
-const regions = ['Global', 'EU', 'NA', 'SA', 'ASIA'];
+const regions = ["Global", "EU", "NA", "SA", "ASIA"];
 
 const rankIcons = {
   bronze: Medal,
   silver: Medal,
   gold: Award,
   platinum: Trophy,
-  diamond: Crown
+  diamond: Crown,
 };
 
 export default function ProfilePage() {
@@ -40,7 +53,7 @@ export default function ProfilePage() {
   // Se não estiver logado, redirecionar para login
   useEffect(() => {
     if (!user) {
-      router.push('/login');
+      router.push("/login");
     }
   }, [user, router]);
 
@@ -53,9 +66,9 @@ export default function ProfilePage() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center bg-black text-white">
         <div className="text-center">
-          <div className="w-8 h-8 border-2 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <div className="mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-2 border-orange-500 border-t-transparent" />
           <p className="text-white">Carregando...</p>
         </div>
       </div>
@@ -73,25 +86,33 @@ export default function ProfilePage() {
   };
 
   const toggleProfileVisibility = () => {
-    const newVisibility = editedUser.profileVisibility === 'public' ? 'private' : 'public';
+    const newVisibility = editedUser.profileVisibility === "public" ? "private" : "public";
     setEditedUser({ ...editedUser, profileVisibility: newVisibility });
   };
 
   const getRankColor = (rank: string) => {
-    if (rank.toLowerCase().includes('bronze')) return 'text-orange-600';
-    if (rank.toLowerCase().includes('prata') || rank.toLowerCase().includes('silver')) return 'text-gray-400';
-    if (rank.toLowerCase().includes('ouro') || rank.toLowerCase().includes('gold')) return 'text-yellow-500';
-    if (rank.toLowerCase().includes('platina') || rank.toLowerCase().includes('platinum')) return 'text-purple-500';
-    if (rank.toLowerCase().includes('diamante') || rank.toLowerCase().includes('diamond')) return 'text-cyan-500';
-    return 'text-gray-500';
+    if (rank.toLowerCase().includes("bronze")) return "text-orange-600";
+    if (rank.toLowerCase().includes("prata") || rank.toLowerCase().includes("silver"))
+      return "text-gray-400";
+    if (rank.toLowerCase().includes("ouro") || rank.toLowerCase().includes("gold"))
+      return "text-yellow-500";
+    if (rank.toLowerCase().includes("platina") || rank.toLowerCase().includes("platinum"))
+      return "text-purple-500";
+    if (rank.toLowerCase().includes("diamante") || rank.toLowerCase().includes("diamond"))
+      return "text-cyan-500";
+    return "text-gray-500";
   };
 
   const getRankIcon = (rank: string) => {
-    if (rank.toLowerCase().includes('bronze')) return rankIcons.bronze;
-    if (rank.toLowerCase().includes('prata') || rank.toLowerCase().includes('silver')) return rankIcons.silver;
-    if (rank.toLowerCase().includes('ouro') || rank.toLowerCase().includes('gold')) return rankIcons.gold;
-    if (rank.toLowerCase().includes('platina') || rank.toLowerCase().includes('platinum')) return rankIcons.platinum;
-    if (rank.toLowerCase().includes('diamante') || rank.toLowerCase().includes('diamond')) return rankIcons.diamond;
+    if (rank.toLowerCase().includes("bronze")) return rankIcons.bronze;
+    if (rank.toLowerCase().includes("prata") || rank.toLowerCase().includes("silver"))
+      return rankIcons.silver;
+    if (rank.toLowerCase().includes("ouro") || rank.toLowerCase().includes("gold"))
+      return rankIcons.gold;
+    if (rank.toLowerCase().includes("platina") || rank.toLowerCase().includes("platinum"))
+      return rankIcons.platinum;
+    if (rank.toLowerCase().includes("diamante") || rank.toLowerCase().includes("diamond"))
+      return rankIcons.diamond;
     return rankIcons.bronze;
   };
 
@@ -99,23 +120,27 @@ export default function ProfilePage() {
     <div className="min-h-screen bg-black text-white">
       <Navbar />
 
-      <div className="container mx-auto px-6 py-8 max-w-[1440px]">
+      <div className="container mx-auto max-w-[1440px] px-6 py-8">
         {/* Header do Perfil */}
-        <div className="bg-gradient-to-r from-orange-600/20 to-orange-600/20 border border-orange-600/30 rounded-xl p-8 mb-8">
-          <div className="flex items-center justify-between mb-6">
+        <div className="mb-8 rounded-xl border border-orange-600/30 bg-gradient-to-r from-orange-600/20 to-orange-600/20 p-8">
+          <div className="mb-6 flex items-center justify-between">
             <h1 className="text-3xl font-bold text-orange-500">Perfil do Jogador</h1>
             <div className="flex items-center gap-4">
               {/* Toggle de visibilidade */}
               <button
                 onClick={toggleProfileVisibility}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
-                  editedUser.profileVisibility === 'public' 
-                    ? 'bg-green-600/20 text-green-500 border border-green-600/30' 
-                    : 'bg-red-600/20 text-red-500 border border-red-600/30'
+                className={`flex items-center gap-2 rounded-lg px-4 py-2 transition-colors ${
+                  editedUser.profileVisibility === "public"
+                    ? "border border-green-600/30 bg-green-600/20 text-green-500"
+                    : "border border-red-600/30 bg-red-600/20 text-red-500"
                 }`}
               >
-                {editedUser.profileVisibility === 'public' ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
-                {editedUser.profileVisibility === 'public' ? 'Público' : 'Privado'}
+                {editedUser.profileVisibility === "public" ? (
+                  <Eye className="h-4 w-4" />
+                ) : (
+                  <EyeOff className="h-4 w-4" />
+                )}
+                {editedUser.profileVisibility === "public" ? "Público" : "Privado"}
               </button>
 
               {/* Botões de edição */}
@@ -123,13 +148,13 @@ export default function ProfilePage() {
                 <div className="flex gap-2">
                   <button
                     onClick={handleCancel}
-                    className="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors"
+                    className="rounded-lg bg-gray-600 px-4 py-2 text-white transition-colors hover:bg-gray-700"
                   >
                     Cancelar
                   </button>
                   <button
                     onClick={handleSave}
-                    className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
+                    className="rounded-lg bg-green-600 px-4 py-2 text-white transition-colors hover:bg-green-700"
                   >
                     Salvar
                   </button>
@@ -137,26 +162,28 @@ export default function ProfilePage() {
               ) : (
                 <button
                   onClick={() => setIsEditing(true)}
-                  className="px-4 py-2 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white rounded-lg transition-colors flex items-center gap-2"
+                  className="flex items-center gap-2 rounded-lg bg-gradient-to-r from-orange-500 to-red-600 px-4 py-2 text-white transition-colors hover:from-orange-600 hover:to-red-700"
                 >
-                  <Settings className="w-4 h-4" />
+                  <Settings className="h-4 w-4" />
                   Editar Perfil
                 </button>
               )}
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             {/* Avatar e informações básicas */}
             <div className="space-y-6">
               {/* Avatar */}
               <div className="text-center">
-                <div className="w-32 h-32 mx-auto bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center mb-4">
-                  <span className="text-4xl font-bold text-black">{user.nickname[0].toUpperCase()}</span>
+                <div className="mx-auto mb-4 flex h-32 w-32 items-center justify-center rounded-full bg-gradient-to-br from-orange-500 to-orange-600">
+                  <span className="text-4xl font-bold text-black">
+                    {user.nickname[0].toUpperCase()}
+                  </span>
                 </div>
-                <h2 className="text-2xl font-bold text-white mb-2">{user.nickname}</h2>
+                <h2 className="mb-2 text-2xl font-bold text-white">{user.nickname}</h2>
                 <div className="flex items-center justify-center gap-2">
-                  <Shield className="w-4 h-4 text-orange-500" />
+                  <Shield className="h-4 w-4 text-orange-500" />
                   <span className="text-orange-500">Jogador Competitivo</span>
                 </div>
               </div>
@@ -164,13 +191,13 @@ export default function ProfilePage() {
               {/* Informações editáveis */}
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Nickname</label>
+                  <label className="mb-1 block text-sm text-gray-400">Nickname</label>
                   {isEditing ? (
                     <input
                       type="text"
                       value={editedUser.nickname}
                       onChange={(e) => setEditedUser({ ...editedUser, nickname: e.target.value })}
-                      className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white"
+                      className="w-full rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-white"
                     />
                   ) : (
                     <p className="text-white">{user.nickname}</p>
@@ -178,13 +205,15 @@ export default function ProfilePage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Email da Ubisoft Connect</label>
+                  <label className="mb-1 block text-sm text-gray-400">
+                    Email da Ubisoft Connect
+                  </label>
                   {isEditing ? (
                     <input
                       type="email"
                       value={editedUser.email}
                       onChange={(e) => setEditedUser({ ...editedUser, email: e.target.value })}
-                      className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white"
+                      className="w-full rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-white"
                     />
                   ) : (
                     <p className="text-white">{user.email}</p>
@@ -192,15 +221,17 @@ export default function ProfilePage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Região</label>
+                  <label className="mb-1 block text-sm text-gray-400">Região</label>
                   {isEditing ? (
                     <select
                       value={editedUser.region}
                       onChange={(e) => setEditedUser({ ...editedUser, region: e.target.value })}
-                      className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white"
+                      className="w-full rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-white"
                     >
-                      {regions.map(region => (
-                        <option key={region} value={region}>{region}</option>
+                      {regions.map((region) => (
+                        <option key={region} value={region}>
+                          {region}
+                        </option>
                       ))}
                     </select>
                   ) : (
@@ -211,21 +242,23 @@ export default function ProfilePage() {
             </div>
 
             {/* Estatísticas principais */}
-            <div className="lg:col-span-2 space-y-6">
+            <div className="space-y-6 lg:col-span-2">
               {/* Rank Geral */}
-              <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                  <Trophy className="w-6 h-6 text-yellow-500" />
+              <div className="rounded-xl border border-gray-800 bg-gray-900 p-6">
+                <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-white">
+                  <Trophy className="h-6 w-6 text-yellow-500" />
                   Rank Geral
                 </h3>
                 <div className="flex items-center gap-4">
                   {(() => {
-                    const RankIcon = getRankIcon(user.stats?.rank || 'Bronze III');
-                    return <RankIcon className="w-12 h-12 text-yellow-500" />;
+                    const RankIcon = getRankIcon(user.stats?.rank || "Bronze III");
+                    return <RankIcon className="h-12 w-12 text-yellow-500" />;
                   })()}
                   <div>
-                    <p className={`text-2xl font-bold ${getRankColor(user.stats?.rank || 'Bronze III')}`}>
-                      {user.stats?.rank || 'Bronze III'}
+                    <p
+                      className={`text-2xl font-bold ${getRankColor(user.stats?.rank || "Bronze III")}`}
+                    >
+                      {user.stats?.rank || "Bronze III"}
                     </p>
                     <p className="text-gray-400">Temporada 2024</p>
                   </div>
@@ -233,26 +266,30 @@ export default function ProfilePage() {
               </div>
 
               {/* Ranks por modo de jogo */}
-              <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                  <Swords className="w-6 h-6 text-orange-500" />
+              <div className="rounded-xl border border-gray-800 bg-gray-900 p-6">
+                <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-white">
+                  <Swords className="h-6 w-6 text-orange-500" />
                   Ranks por Modo
                 </h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
                   {[
-                    { mode: 'Duelo', rank: user.stats?.dueloRank },
-                    { mode: 'Briga', rank: user.stats?.brigaRank },
-                    { mode: 'Domínio', rank: user.stats?.dominioRank },
-                    { mode: 'Invasão', rank: user.stats?.invasaoRank },
-                    { mode: 'Tributo', rank: user.stats?.tributoRank },
-                    { mode: 'Mata-mata', rank: user.stats?.mataMataRank }
+                    { mode: "Duelo", rank: user.stats?.dueloRank },
+                    { mode: "Briga", rank: user.stats?.brigaRank },
+                    { mode: "Domínio", rank: user.stats?.dominioRank },
+                    { mode: "Invasão", rank: user.stats?.invasaoRank },
+                    { mode: "Tributo", rank: user.stats?.tributoRank },
+                    { mode: "Mata-mata", rank: user.stats?.mataMataRank },
                   ].map(({ mode, rank }) => {
-                    const RankIcon = getRankIcon(rank || 'Bronze III');
+                    const RankIcon = getRankIcon(rank || "Bronze III");
                     return (
-                      <div key={mode} className="bg-gray-800 rounded-lg p-4 text-center">
-                        <RankIcon className={`w-8 h-8 mx-auto mb-2 ${getRankColor(rank || 'Bronze III')}`} />
-                        <p className="text-white font-semibold">{mode}</p>
-                        <p className={`text-sm ${getRankColor(rank || 'Bronze III')}`}>{rank || 'Bronze III'}</p>
+                      <div key={mode} className="rounded-lg bg-gray-800 p-4 text-center">
+                        <RankIcon
+                          className={`mx-auto mb-2 h-8 w-8 ${getRankColor(rank || "Bronze III")}`}
+                        />
+                        <p className="font-semibold text-white">{mode}</p>
+                        <p className={`text-sm ${getRankColor(rank || "Bronze III")}`}>
+                          {rank || "Bronze III"}
+                        </p>
                       </div>
                     );
                   })}
@@ -260,14 +297,16 @@ export default function ProfilePage() {
               </div>
 
               {/* Estatísticas gerais */}
-              <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                  <Target className="w-6 h-6 text-blue-500" />
+              <div className="rounded-xl border border-gray-800 bg-gray-900 p-6">
+                <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-white">
+                  <Target className="h-6 w-6 text-blue-500" />
                   Desempenho Geral
                 </h3>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
                   <div className="text-center">
-                    <p className="text-2xl font-bold text-white">{user.stats?.matchesPlayed || 0}</p>
+                    <p className="text-2xl font-bold text-white">
+                      {user.stats?.matchesPlayed || 0}
+                    </p>
                     <p className="text-gray-400">Partidas</p>
                   </div>
                   <div className="text-center">
@@ -279,25 +318,31 @@ export default function ProfilePage() {
                     <p className="text-gray-400">Derrotas</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-2xl font-bold text-orange-500">{user.stats?.winRate || 0}%</p>
+                    <p className="text-2xl font-bold text-orange-500">
+                      {user.stats?.winRate || 0}%
+                    </p>
                     <p className="text-gray-400">Win Rate</p>
                   </div>
                 </div>
-                
-                <div className="grid grid-cols-2 gap-4 mt-6">
-                  <div className="bg-gray-800 rounded-lg p-4">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Swords className="w-5 h-5 text-red-500" />
-                      <span className="text-white font-semibold">Kills</span>
+
+                <div className="mt-6 grid grid-cols-2 gap-4">
+                  <div className="rounded-lg bg-gray-800 p-4">
+                    <div className="mb-2 flex items-center gap-2">
+                      <Swords className="h-5 w-5 text-red-500" />
+                      <span className="font-semibold text-white">Kills</span>
                     </div>
-                    <p className="text-2xl font-bold text-red-500">{user.stats?.kills?.toLocaleString() || 0}</p>
+                    <p className="text-2xl font-bold text-red-500">
+                      {user.stats?.kills?.toLocaleString() || 0}
+                    </p>
                   </div>
-                  <div className="bg-gray-800 rounded-lg p-4">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Shield className="w-5 h-5 text-blue-500" />
-                      <span className="text-white font-semibold">Mortes</span>
+                  <div className="rounded-lg bg-gray-800 p-4">
+                    <div className="mb-2 flex items-center gap-2">
+                      <Shield className="h-5 w-5 text-blue-500" />
+                      <span className="font-semibold text-white">Mortes</span>
                     </div>
-                    <p className="text-2xl font-bold text-blue-500">{user.stats?.deaths?.toLocaleString() || 0}</p>
+                    <p className="text-2xl font-bold text-blue-500">
+                      {user.stats?.deaths?.toLocaleString() || 0}
+                    </p>
                   </div>
                 </div>
               </div>

@@ -5,7 +5,9 @@
 This directory contains TypeScript type definitions and interfaces used throughout the application.
 
 ### Purpose
+
 Centralized type definitions provide:
+
 - Type safety across the application
 - Clear data structure contracts
 - Better IDE autocomplete and IntelliSense
@@ -40,13 +42,14 @@ Centralized type definitions provide:
 3. **Interface vs Type**
    - Use `interface` for object shapes (can be extended)
    - Use `type` for unions, intersections, and primitives
+
    ```typescript
    interface User {
      id: string;
      name: string;
    }
-   
-   type Status = 'active' | 'inactive' | 'pending';
+
+   type Status = "active" | "inactive" | "pending";
    ```
 
 4. **Documentation**
@@ -55,6 +58,7 @@ Centralized type definitions provide:
    - Explain business logic constraints
 
 ### Example Structure
+
 ```typescript
 // types/user.ts
 export interface User {
@@ -71,15 +75,16 @@ export interface UserStats {
 }
 
 // types/index.ts
-export type { User, UserStats } from './user';
-export type { AuthContextType } from './auth';
+export type { User, UserStats } from "./user";
+export type { AuthContextType } from "./auth";
 ```
 
 ### Usage
+
 ```tsx
-import type { User } from '@/types';
+import type { User } from "@/types";
 // or
-import type { User } from '@/types/user';
+import type { User } from "@/types/user";
 
 function UserProfile({ user }: { user: User }) {
   return <div>{user.nickname}</div>;
@@ -93,7 +98,9 @@ function UserProfile({ user }: { user: User }) {
 Este diretório contém definições de tipos TypeScript e interfaces usadas em toda a aplicação.
 
 ### Propósito
+
 Definições de tipos centralizadas fornecem:
+
 - Type safety em toda a aplicação
 - Contratos claros de estrutura de dados
 - Melhor autocomplete e IntelliSense da IDE
@@ -128,13 +135,14 @@ Definições de tipos centralizadas fornecem:
 3. **Interface vs Type**
    - Use `interface` para formas de objetos (podem ser estendidas)
    - Use `type` para uniões, interseções e primitivos
+
    ```typescript
    interface User {
      id: string;
      name: string;
    }
-   
-   type Status = 'ativo' | 'inativo' | 'pendente';
+
+   type Status = "ativo" | "inativo" | "pendente";
    ```
 
 4. **Documentação**
@@ -143,6 +151,7 @@ Definições de tipos centralizadas fornecem:
    - Explique restrições de lógica de negócio
 
 ### Exemplo de Estrutura
+
 ```typescript
 // types/user.ts
 export interface User {
@@ -159,15 +168,16 @@ export interface UserStats {
 }
 
 // types/index.ts
-export type { User, UserStats } from './user';
-export type { AuthContextType } from './auth';
+export type { User, UserStats } from "./user";
+export type { AuthContextType } from "./auth";
 ```
 
 ### Uso
+
 ```tsx
-import type { User } from '@/types';
+import type { User } from "@/types";
 // ou
-import type { User } from '@/types/user';
+import type { User } from "@/types/user";
 
 function UserProfile({ user }: { user: User }) {
   return <div>{user.nickname}</div>;

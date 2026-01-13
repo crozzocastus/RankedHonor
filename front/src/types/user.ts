@@ -20,6 +20,6 @@ export interface User {
   email: string;
   region: string;
   avatar: string;
-  profileVisibility: 'public' | 'private';
+  profileVisibility: "public" | "private";
   stats?: UserStats;
 }

@@ -5,7 +5,9 @@
 This directory contains all React components organized by feature, purpose, and reusability.
 
 ### Purpose
+
 Components are the building blocks of the React application. This directory is organized to:
+
 - Separate concerns by feature and responsibility
 - Promote component reusability
 - Make it easy to locate and maintain components
@@ -30,6 +32,7 @@ Components are the building blocks of the React application. This directory is o
 5. **landing/** - Marketing/promotional page components
 
 ### Component Naming
+
 - Use PascalCase for component files: `UserProfile.tsx`
 - Match component name with filename
 - Use descriptive, clear names
@@ -41,7 +44,9 @@ Components are the building blocks of the React application. This directory is o
 Este diretório contém todos os componentes React organizados por feature, propósito e reusabilidade.
 
 ### Propósito
+
 Componentes são os blocos de construção da aplicação React. Este diretório é organizado para:
+
 - Separar responsabilidades por feature e responsabilidade
 - Promover reusabilidade de componentes
 - Facilitar localização e manutenção de componentes
@@ -66,6 +71,7 @@ Componentes são os blocos de construção da aplicação React. Este diretório
 5. **landing/** - Componentes de páginas de marketing/promocionais
 
 ### Nomenclatura de Componentes
+
 - Use PascalCase para arquivos de componente: `UserProfile.tsx`
 - Combine nome do componente com nome do arquivo
 - Use nomes descritivos e claros
