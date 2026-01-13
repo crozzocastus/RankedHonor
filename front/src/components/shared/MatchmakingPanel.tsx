@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { Swords, Clock, Shield, Loader2, Download, AlertCircle } from 'lucide-react';
 

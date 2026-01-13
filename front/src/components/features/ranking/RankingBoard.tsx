@@ -1,3 +1,5 @@
+'use client';
+
 import { Trophy, TrendingUp, TrendingDown } from 'lucide-react';
 
 const topPlayers = [

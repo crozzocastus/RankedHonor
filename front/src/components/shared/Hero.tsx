@@ -1,4 +1,6 @@
-import { ImageWithFallback } from './figma/ImageWithFallback';
+'use client';
+
+import { ImageWithFallback } from '@/components/figma/ImageWithFallback';
 import { Download, CheckCircle } from 'lucide-react';
 
 export function Hero() {

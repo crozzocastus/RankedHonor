@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
-import { Header } from '@/components/landing/Header';
+import { Header } from '@/components/layout/Header';
 import { HeroSection } from '@/components/landing/HeroSection';
 import { QuickActions } from '@/components/landing/QuickActions';
 import { MainFeed } from '@/components/landing/MainFeed';
@@ -13,7 +13,7 @@ import { GameModes } from '@/components/landing/GameModes';
 import { ContentCreators } from '@/components/landing/ContentCreators';
 import { LauncherSection } from '@/components/landing/LauncherSection';
 import { FinalCTA } from '@/components/landing/FinalCTA';
-import { Footer } from '@/components/landing/Footer';
+import { Footer } from '@/components/layout/Footer';
 
 export default function Home() {
   const { user, isLoading } = useAuth();

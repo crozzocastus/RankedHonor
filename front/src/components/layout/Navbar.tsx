@@ -1,3 +1,5 @@
+'use client';
+
 import { Sword, User, LogOut, Home, Download, Radio, BarChart3, ChevronDown, Settings } from 'lucide-react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
-import { Navbar } from '@/components/Navbar';
+import { Navbar } from '@/components/layout/Navbar';
 import { User, Shield, Trophy, Target, Swords, Users, Crown, Medal, Award, Settings, Eye, EyeOff } from 'lucide-react';
 
 // Mock de avatares de heróis do For Honor
@@ -33,7 +33,7 @@ export default function ProfilePage() {
   const { user, updateProfile } = useAuth();
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
-  const [editedUser, setEditedUser] = useState(user ? { ...user } : {});
+  const [editedUser, setEditedUser] = useState<any>(user ? { ...user } : {});
   const [showPassword, setShowPassword] = useState(false);
 
   // Se não estiver logado, redirecionar para login

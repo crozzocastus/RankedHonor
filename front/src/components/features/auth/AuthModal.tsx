@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { X, Sword } from 'lucide-react';
 

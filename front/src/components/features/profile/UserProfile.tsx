@@ -1,3 +1,5 @@
+'use client';
+
 import { Shield, Swords, Trophy, TrendingUp, Star } from 'lucide-react';
 
 interface UserProfileProps {

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
-import { Navbar } from '@/components/Navbar';
+import { Navbar } from '@/components/layout/Navbar';
 import { DashboardHero } from '@/components/dashboard/DashboardHero';
 import { QuickActions } from '@/components/landing/QuickActions';
 import { MainFeed } from '@/components/landing/MainFeed';

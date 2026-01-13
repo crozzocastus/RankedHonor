@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Navbar } from '@/components/Navbar';
+import { Navbar } from '@/components/layout/Navbar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -52,30 +52,10 @@ export default function RankedPage() {
     }, 3000);
   };
 
-  const handleHomeClick = () => {
-    // Navegar para dashboard
-    window.location.href = '/dashboard';
-  };
-
-  const handleProfileClick = () => {
-    // Placeholder
-    alert('Perfil');
-  };
-
-  const handleLogout = () => {
-    // Placeholder
-    alert('Logout');
-  };
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
-      <Navbar
-        currentUser={currentUser}
-        onLoginClick={() => {}}
-        onLogout={handleLogout}
-        onProfileClick={handleProfileClick}
-        onHomeClick={handleHomeClick}
-      />
+      <Navbar />
 
       <div className="container mx-auto px-6 py-12 max-w-4xl">
         <div className="text-center mb-8">

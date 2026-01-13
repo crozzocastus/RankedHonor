@@ -1,5 +1,7 @@
+'use client';
+
 import { Radio, Users, Eye } from 'lucide-react';
-import { ImageWithFallback } from './figma/ImageWithFallback';
+import { ImageWithFallback } from '@/components/figma/ImageWithFallback';
 
 const liveStreams = [
   {
