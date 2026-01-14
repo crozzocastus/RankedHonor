@@ -1,3 +1,5 @@
+import { Faction } from "@/lib/constants/game.constants";
+
 export interface UserStats {
   rank: string;
   dueloRank: string;
@@ -19,6 +21,7 @@ export interface User {
   nickname: string;
   email: string;
   region: string;
+  faction: Faction;
   avatar: string;
   profileVisibility: "public" | "private";
   stats?: UserStats;

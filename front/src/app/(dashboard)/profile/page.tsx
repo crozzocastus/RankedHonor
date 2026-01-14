@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { useAuth } from "@/contexts/AuthContext";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -19,19 +20,23 @@ import {
   Eye,
   EyeOff,
 } from "lucide-react";
-
-// Mock de avatares de heróis do For Honor
-const heroAvatars = [
-  { id: "warden", name: "Warden", faction: "Knights" },
-  { id: "raider", name: "Raider", faction: "Vikings" },
-  { id: "orochi", name: "Orochi", faction: "Samurai" },
-  { id: "conqueror", name: "Conqueror", faction: "Knights" },
-  { id: "berzerker", name: "Berzerker", faction: "Vikings" },
-  { id: "kensei", name: "Kensei", faction: "Samurai" },
-  { id: "peacekeeper", name: "Peacekeeper", faction: "Knights" },
-  { id: "valkyrie", name: "Valkyrie", faction: "Vikings" },
-  { id: "shugoki", name: "Shugoki", faction: "Samurai" },
-];
+import { AvatarPicker } from "@/components/features/profile/AvatarPicker";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import {
+  Faction,
+  FACTION_NAMES,
+  getHeroById,
+  DEFAULT_HEROES_BY_FACTION,
+} from "@/lib/constants/game.constants";
 
 const regions = ["Global", "EU", "NA", "SA", "ASIA"];
 
@@ -44,10 +49,14 @@ const rankIcons = {
 };
 
 export default function ProfilePage() {
-  const { user, updateProfile } = useAuth();
+  const { user, updateProfile, changeFaction } = useAuth();
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
   const [editedUser, setEditedUser] = useState<any>(user ? { ...user } : {});
+  const [avatarPickerOpen, setAvatarPickerOpen] = useState(false);
+  const [factionChangeDialogOpen, setFactionChangeDialogOpen] = useState(false);
+  const [pendingFaction, setPendingFaction] = useState<Faction | null>(null);
+  const [imageError, setImageError] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   // Se não estiver logado, redirecionar para login
@@ -88,6 +97,41 @@ export default function ProfilePage() {
   const toggleProfileVisibility = () => {
     const newVisibility = editedUser.profileVisibility === "public" ? "private" : "public";
     setEditedUser({ ...editedUser, profileVisibility: newVisibility });
+  };
+
+  const handleFactionChange = (newFaction: Faction) => {
+    if (newFaction !== user.faction) {
+      setPendingFaction(newFaction);
+      setFactionChangeDialogOpen(true);
+    }
+  };
+
+  const confirmFactionChange = () => {
+    if (pendingFaction) {
+      changeFaction(pendingFaction);
+      setEditedUser({
+        ...editedUser,
+        faction: pendingFaction,
+        avatar: DEFAULT_HEROES_BY_FACTION[pendingFaction],
+      });
+      setPendingFaction(null);
+      setFactionChangeDialogOpen(false);
+    }
+  };
+
+  const handleAvatarSelect = (heroId: string) => {
+    setEditedUser({ ...editedUser, avatar: heroId });
+    updateProfile({ avatar: heroId });
+  };
+
+  const getAvatarImagePath = () => {
+    if (!user.faction || !user.avatar) return "";
+    const factionFolder = user.faction.toLowerCase().replace(" ", "-");
+    return `/icons/heroes/${factionFolder}/${user.avatar}.svg`;
+  };
+
+  const getAvatarFallback = () => {
+    return user.nickname[0].toUpperCase();
   };
 
   const getRankColor = (rank: string) => {
@@ -176,11 +220,45 @@ export default function ProfilePage() {
             <div className="space-y-6">
               {/* Avatar */}
               <div className="text-center">
-                <div className="mx-auto mb-4 flex h-32 w-32 items-center justify-center rounded-full bg-gradient-to-br from-orange-500 to-orange-600">
-                  <span className="text-4xl font-bold text-black">
-                    {user.nickname[0].toUpperCase()}
-                  </span>
-                </div>
+                <button
+                  onClick={() => setAvatarPickerOpen(true)}
+                  className="group relative mx-auto mb-4 block"
+                  aria-label={`Avatar de ${user.nickname}`}
+                >
+                  <div className="relative h-32 w-32 overflow-hidden rounded-full border-4 border-gray-800 transition-all group-hover:border-orange-500">
+                    {!imageError ? (
+                      <Image
+                        src={getAvatarImagePath()}
+                        alt={`Avatar de ${user.nickname}`}
+                        width={128}
+                        height={128}
+                        className="h-full w-full object-cover"
+                        onError={() => {
+                          // Try .png fallback
+                          const img = document.querySelector(
+                            `img[alt="Avatar de ${user.nickname}"]`
+                          ) as HTMLImageElement;
+                          if (img && img.src.endsWith(".svg")) {
+                            const factionFolder = user.faction.toLowerCase().replace(" ", "-");
+                            img.src = `/icons/heroes/${factionFolder}/${user.avatar}.png`;
+                          } else {
+                            setImageError(true);
+                          }
+                        }}
+                        priority
+                      />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-orange-500 to-red-600">
+                        <span className="text-4xl font-bold text-white">
+                          {getAvatarFallback()}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="absolute inset-0 flex items-center justify-center rounded-full bg-black/50 opacity-0 transition-opacity group-hover:opacity-100">
+                    <Settings className="h-8 w-8 text-white" />
+                  </div>
+                </button>
                 <h2 className="mb-2 text-2xl font-bold text-white">{user.nickname}</h2>
                 <div className="flex items-center justify-center gap-2">
                   <Shield className="h-4 w-4 text-orange-500" />
@@ -236,6 +314,26 @@ export default function ProfilePage() {
                     </select>
                   ) : (
                     <p className="text-white">{user.region}</p>
+                  )}
+                </div>
+
+                <div>
+                  <label className="mb-1 block text-sm text-gray-400">Facção</label>
+                  {isEditing ? (
+                    <select
+                      value={editedUser.faction}
+                      onChange={(e) => handleFactionChange(e.target.value as Faction)}
+                      aria-label="Alterar facção"
+                      className="w-full rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-white"
+                    >
+                      {(Object.keys(FACTION_NAMES) as Faction[]).map((faction) => (
+                        <option key={faction} value={faction}>
+                          {FACTION_NAMES[faction]}
+                        </option>
+                      ))}
+                    </select>
+                  ) : (
+                    <p className="text-white">{FACTION_NAMES[user.faction]}</p>
                   )}
                 </div>
               </div>
@@ -350,6 +448,48 @@ export default function ProfilePage() {
           </div>
         </div>
       </div>
+
+      {/* Avatar Picker Dialog */}
+      <AvatarPicker
+        open={avatarPickerOpen}
+        onOpenChange={setAvatarPickerOpen}
+        currentFaction={user.faction}
+        currentAvatar={user.avatar}
+        onSelectAvatar={handleAvatarSelect}
+      />
+
+      {/* Faction Change Confirmation Dialog */}
+      <AlertDialog open={factionChangeDialogOpen} onOpenChange={setFactionChangeDialogOpen}>
+        <AlertDialogContent className="border-gray-800 bg-gray-900 text-white">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-orange-500">Confirmar Mudança de Facção</AlertDialogTitle>
+            <AlertDialogDescription className="text-gray-300">
+              {pendingFaction && (
+                <>
+                  Mudar para <span className="font-bold text-orange-500">{FACTION_NAMES[pendingFaction]}</span> resetará
+                  seu avatar para{" "}
+                  <span className="font-bold text-orange-500">
+                    {getHeroById(DEFAULT_HEROES_BY_FACTION[pendingFaction])?.name}
+                  </span>
+                  . Você poderá escolher outro herói da nova facção depois. Confirmar?
+                </>
+              )}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel className="border-gray-700 bg-gray-800 text-white hover:bg-gray-700">
+              Cancelar
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={confirmFactionChange}
+              className="bg-gradient-to-r from-orange-500 to-red-600 text-white hover:from-orange-600 hover:to-red-700"
+            >
+              Confirmar
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
       <Footer />
     </div>
   );

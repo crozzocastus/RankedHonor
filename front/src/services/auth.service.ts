@@ -6,6 +6,12 @@ import {
   DEFAULT_AVATAR,
   MOCK_PASSWORD,
 } from "@/lib/constants/auth.constants";
+import {
+  Faction,
+  DEFAULT_HEROES_BY_FACTION,
+  saveFactionToCache,
+  saveAvatarToCache,
+} from "@/lib/constants/game.constants";
 
 // Mock users for development/testing
 export const mockUsers: User[] = [
@@ -14,6 +20,7 @@ export const mockUsers: User[] = [
     nickname: "WarLegend",
     email: "war@legend.com",
     region: "EU",
+    faction: "Knights",
     avatar: "warden",
     profileVisibility: "public",
     stats: {
@@ -64,12 +71,14 @@ export async function loginUser(nickname: string, password: string): Promise<Use
  * @param nickname - User's nickname
  * @param email - User's email
  * @param password - User's password
+ * @param faction - User's chosen faction
  * @returns User object if successful, null if nickname already exists
  */
 export async function registerUser(
   nickname: string,
   email: string,
-  password: string
+  password: string,
+  faction: Faction
 ): Promise<User | null> {
   await simulateApiDelay();
 
@@ -100,12 +109,18 @@ export async function registerUser(
     nickname,
     email,
     region: DEFAULT_REGION,
-    avatar: DEFAULT_AVATAR,
+    faction,
+    avatar: DEFAULT_HEROES_BY_FACTION[faction],
     profileVisibility: "public",
     stats: defaultStats,
   };
 
   mockUsers.push(newUser);
+  
+  // Save to cache
+  saveFactionToCache(newUser.id, faction);
+  saveAvatarToCache(newUser.id, newUser.avatar);
+  
   return { ...newUser }; // Return a copy to avoid mutations
 }
 

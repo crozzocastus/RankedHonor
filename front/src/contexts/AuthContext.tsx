@@ -9,6 +9,12 @@ import {
   saveUser,
   updateUserInMockData,
 } from "@/services/auth.service";
+import {
+  Faction,
+  DEFAULT_HEROES_BY_FACTION,
+  saveFactionToCache,
+  saveAvatarToCache,
+} from "@/lib/constants/game.constants";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -42,9 +48,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return false;
   };
 
-  const register = async (nickname: string, email: string, password: string): Promise<boolean> => {
+  const register = async (
+    nickname: string,
+    email: string,
+    password: string,
+    faction: Faction
+  ): Promise<boolean> => {
     setIsLoading(true);
-    const newUser = await registerUser(nickname, email, password);
+    const newUser = await registerUser(nickname, email, password, faction);
     if (newUser) {
       setUser(newUser);
       setIsLoading(false);
@@ -63,6 +74,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const updatedUser = { ...user, ...updates };
       setUser(updatedUser);
       updateUserInMockData(user.id, updates);
+      
+      // Update cache if faction or avatar changed
+      if (updates.faction) {
+        saveFactionToCache(user.id, updates.faction);
+      }
+      if (updates.avatar) {
+        saveAvatarToCache(user.id, updates.avatar);
+      }
+    }
+  };
+
+  const changeFaction = (newFaction: Faction) => {
+    if (user) {
+      const newAvatar = DEFAULT_HEROES_BY_FACTION[newFaction];
+      const updates = { faction: newFaction, avatar: newAvatar };
+      const updatedUser = { ...user, ...updates };
+      setUser(updatedUser);
+      updateUserInMockData(user.id, updates);
+      
+      // Update cache
+      saveFactionToCache(user.id, newFaction);
+      saveAvatarToCache(user.id, newAvatar);
     }
   };
 
@@ -74,6 +107,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         register,
         logout,
         updateProfile,
+        changeFaction,
         isLoading,
       }}
     >

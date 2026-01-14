@@ -7,6 +7,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Sword, Eye, EyeOff, AlertCircle, CheckCircle } from "lucide-react";
 import Link from "next/link";
+import { Faction, FACTION_NAMES } from "@/lib/constants/game.constants";
 
 export default function RegisterPage() {
   const { register, isLoading, user } = useAuth();
@@ -16,6 +17,7 @@ export default function RegisterPage() {
     email: "",
     password: "",
     confirmPassword: "",
+    faction: "" as Faction | "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -50,7 +52,12 @@ export default function RegisterPage() {
       return;
     }
 
-    const success = await register(formData.nickname, formData.email, formData.password);
+    if (!formData.faction) {
+      setError("Você deve escolher uma facção.");
+      return;
+    }
+
+    const success = await register(formData.nickname, formData.email, formData.password, formData.faction);
 
     if (success) {
       setSuccess(true);
@@ -63,7 +70,7 @@ export default function RegisterPage() {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -131,6 +138,34 @@ export default function RegisterPage() {
                   />
                   <p className="mt-1 text-sm text-gray-500">
                     Use o mesmo email da sua conta Ubisoft.
+                  </p>
+                </div>
+
+                {/* Facção */}
+                <div>
+                  <label htmlFor="faction" className="mb-2 block text-sm font-medium text-gray-300">
+                    Facção *
+                  </label>
+                  <select
+                    id="faction"
+                    name="faction"
+                    value={formData.faction}
+                    onChange={handleChange}
+                    required
+                    aria-label="Escolha sua facção"
+                    className="w-full rounded-lg border border-gray-700 bg-gray-900 px-4 py-3 text-white focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  >
+                    <option value="" disabled>
+                      Selecione sua facção
+                    </option>
+                    {(Object.keys(FACTION_NAMES) as Faction[]).map((faction) => (
+                      <option key={faction} value={faction}>
+                        {FACTION_NAMES[faction]}
+                      </option>
+                    ))}
+                  </select>
+                  <p className="mt-1 text-sm text-gray-500">
+                    Sua facção define seu avatar padrão. Pode ser alterada depois.
                   </p>
                 </div>
 
