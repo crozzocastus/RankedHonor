@@ -1,0 +1,27 @@
+[package]
+name = "matchmaking-engine"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+# Workspace dependencies
+tokio.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+redis.workspace = true
+uuid.workspace = true
+chrono.workspace = true
+thiserror.workspace = true
+anyhow.workspace = true
+tracing.workspace = true
+
+# Local dependencies
+shared-models = { path = "../shared-models" }
+
+# Specific dependencies
+async-trait = "0.1"
+
+[dev-dependencies]
+mockall.workspace = true

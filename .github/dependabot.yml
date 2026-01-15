@@ -31,23 +31,41 @@ updates:
       dev-dependencies:
         dependency-type: "development"
 
-  # Future: Backend Rust dependencies
-  # - package-ecosystem: "cargo"
-  #   directory: "/back"
-  #   schedule:
-  #     interval: "weekly"
-  #     day: "tuesday"
-  #   open-pull-requests-limit: 3
-  #   reviewers:
-  #     - "crozzo"
-  #   labels:
-  #     - "dependencies"
-  #     - "backend"
-  #     - "rust"
+  # Backend Rust dependencies
+  - package-ecosystem: "cargo"
+    directory: "/back/rust-core"
+    schedule:
+      interval: "weekly"
+      day: "tuesday"
+      time: "09:00"
+    open-pull-requests-limit: 3
+    reviewers:
+      - "crozzo"
+    labels:
+      - "dependencies"
+      - "backend"
+      - "rust"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
 
-  # Future: Backend Python dependencies
-  # - package-ecosystem: "pip"
-  #   directory: "/back"
+  # Backend Python dependencies
+  - package-ecosystem: "pip"
+    directory: "/back/python-api"
+    schedule:
+      interval: "weekly"
+      day: "wednesday"
+      time: "09:00"
+    open-pull-requests-limit: 3
+    reviewers:
+      - "crozzo"
+    labels:
+      - "dependencies"
+      - "backend"
+      - "python"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
   #   schedule:
   #     interval: "weekly"
   #     day: "wednesday"

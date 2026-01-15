@@ -29,6 +29,54 @@ jobs:
         run: npm audit --audit-level=moderate
         continue-on-error: true
 
+  cargo-audit:
+    name: Cargo Audit (Rust Backend)
+    runs-on: ubuntu-latest
+    if: github.event_name != 'schedule' || github.ref == 'refs/heads/main'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install cargo-audit
+        run: cargo install cargo-audit
+
+      - name: Run cargo audit
+        working-directory: back/rust-core
+        run: cargo audit
+        continue-on-error: true
+
+  pip-audit:
+    name: Pip Audit (Python Backend)
+    runs-on: ubuntu-latest
+    if: github.event_name != 'schedule' || github.ref == 'refs/heads/main'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        working-directory: back/python-api
+        run: |
+          uv venv
+          uv pip install pip-audit
+
+      - name: Run pip-audit
+        working-directory: back/python-api
+        run: uv run pip-audit
+        continue-on-error: true
+
   secret-scanning:
     name: Secret Scanning
     runs-on: ubuntu-latest
@@ -70,7 +118,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [javascript-typescript]
+        language: [javascript-typescript, rust]
     
     steps:
       - name: Checkout code

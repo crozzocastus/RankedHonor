@@ -1,0 +1,11 @@
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Dumps
+*.dump
+*.sql.gz
+
+# Migration artifacts
+migration-output/

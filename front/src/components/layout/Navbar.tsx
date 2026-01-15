@@ -14,6 +14,7 @@ import {
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
+import Image from "next/image";
 
 interface NavbarProps {
   onContentClick?: () => void;
@@ -24,6 +25,17 @@ export function Navbar({ onContentClick, onStatsClick }: NavbarProps) {
   const { user, logout } = useAuth();
   const router = useRouter();
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [avatarImageError, setAvatarImageError] = useState(false);
+
+  const getAvatarImagePath = () => {
+    if (!user?.faction || !user?.avatar) return "";
+    const factionFolder = user.faction.toLowerCase().replace(" ", "-");
+    return `/icons/heroes/${factionFolder}/${user.avatar}.svg`;
+  };
+
+  const getAvatarFallback = () => {
+    return user?.nickname?.[0]?.toUpperCase() || "U";
+  };
 
   const handleDownloadLauncher = () => {
     alert(
@@ -118,10 +130,33 @@ export function Navbar({ onContentClick, onStatsClick }: NavbarProps) {
                   onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
                   className="flex items-center gap-2 rounded border border-slate-600 bg-slate-800 px-4 py-2 text-slate-300 transition-colors hover:bg-slate-700"
                 >
-                  <div className="flex h-5 w-5 items-center justify-center rounded-full bg-orange-500">
-                    <span className="text-xs font-bold text-black">
-                      {user.nickname[0].toUpperCase()}
-                    </span>
+                  <div className="relative h-6 w-6 overflow-hidden rounded-full border border-orange-500/30">
+                    {!avatarImageError && getAvatarImagePath() ? (
+                      <Image
+                        src={getAvatarImagePath()}
+                        alt={`Avatar de ${user.nickname}`}
+                        width={24}
+                        height={24}
+                        className="h-full w-full object-cover"
+                        onError={() => {
+                          const img = document.querySelector(
+                            `img[alt="Avatar de ${user.nickname}"]`
+                          ) as HTMLImageElement;
+                          if (img && img.src.endsWith(".svg")) {
+                            const factionFolder = user.faction.toLowerCase().replace(" ", "-");
+                            img.src = `/icons/heroes/${factionFolder}/${user.avatar}.png`;
+                          } else {
+                            setAvatarImageError(true);
+                          }
+                        }}
+                      />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center rounded-full bg-gradient-to-br from-orange-500 to-red-600">
+                        <span className="text-xs font-bold text-white">
+                          {getAvatarFallback()}
+                        </span>
+                      </div>
+                    )}
                   </div>
                   <span className="hidden sm:inline">{user.nickname}</span>
                   <ChevronDown className="h-4 w-4" />

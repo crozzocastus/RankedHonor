@@ -1,3 +1,67 @@
+# =============================================================================
+# PYTHON
+# =============================================================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Python distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# UV package manager
+.uv/
+uv.lock
+
+# Testing
+.pytest_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+.hypothesis/
+
+# =============================================================================
+# RUST
+# =============================================================================
+# Build outputs
+target/
+
+# Backup files
+**/*.rs.bk
+
+# Debug symbols (Windows)
+*.pdb
+
+# Note: Cargo.lock is committed for binary projects (game-server, websocket-server)
+
+# =============================================================================
+# NODE.JS / FRONTEND
+# =============================================================================
 # Dependencies
 node_modules/
 npm-debug.log*
@@ -9,32 +73,20 @@ lerna-debug.log*
 # Next.js
 .next/
 out/
+
+# Build outputs
 build/
 dist/
 
-# Environment variables
-.env
-.env*.local
-.env.development.local
-.env.test.local
-.env.production.local
+# Nuxt.js build / generate output
+.nuxt
 
-# Logs
-*.log
-logs/
+# Gatsby files
+public
 
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# Coverage directory used by tools like istanbul
-coverage/
-*.lcov
-
-# nyc test coverage
-.nyc_output
+# Storybook build outputs
+.out
+.storybook-out
 
 # Dependency directories
 jspm_packages/
@@ -45,77 +97,121 @@ jspm_packages/
 # Optional eslint cache
 .eslintcache
 
-# Microbundle cache
-.rpt2_cache/
-.rts2_cache_cjs/
-.rts2_cache_es/
-.rts2_cache_umd/
-
-# Optional REPL history
-.node_repl_history
-
 # Output of 'npm pack'
 *.tgz
 
 # Yarn Integrity file
 .yarn-integrity
 
-# parcel-bundler cache (https://parceljs.org/)
+# Vite
+vite.config.ts.timestamp-*
+
+# Tailwind (commented - usually committed)
+# tailwind.config.ts
+
+# =============================================================================
+# DATABASE
+# =============================================================================
+*.db
+*.sqlite
+*.sqlite3
+
+# =============================================================================
+# ENVIRONMENT VARIABLES
+# =============================================================================
+.env
+.env*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# =============================================================================
+# LOGS
+# =============================================================================
+*.log
+logs/
+
+# =============================================================================
+# TESTING / COVERAGE
+# =============================================================================
+coverage/
+*.lcov
+.nyc_output
+
+# =============================================================================
+# CACHE / BUILD / RUNTIME
+# =============================================================================
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Cache directories
 .cache
+.cache/
 .parcel-cache
 
-# Next.js build output
-.next
-
-# Nuxt.js build / generate output
-.nuxt
-dist
-
-# Gatsby files
-.cache/
-public
-
-# Storybook build outputs
-.out
-.storybook-out
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
 
 # Temporary folders
 tmp/
 temp/
 
-# Editor directories and files
+# Optional REPL history
+.node_repl_history
+
+# =============================================================================
+# EDITORS / IDEs
+# =============================================================================
+# VS Code
 .vscode/*
 !.vscode/extensions.json
+
+# JetBrains IDEs
 .idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
-*.sw?
 
-# OS generated files
+# Vim
+*.sw?
+*.swp
+*.swo
+*~
+
+# Generic backup files
+*.bak
+
+# =============================================================================
+# OS FILES
+# =============================================================================
+# macOS
+.DS_Store
+
+# Windows
 Thumbs.db
 ehthumbs.db
 Desktop.ini
 
+# =============================================================================
+# SECURITY / SENSITIVE FILES
+# =============================================================================
 # Private keys
 *.pem
 *.key
 *.crt
 
-# Database
-*.db
-*.sqlite
-*.sqlite3
-
-# Vite
-vite.config.ts.timestamp-*
-
-# Tailwind
-tailwind.config.ts
-
-# Package manager lock files (optional, but often committed)
+# =============================================================================
+# PACKAGE MANAGER LOCK FILES
+# =============================================================================
+# Uncomment to ignore lock files (not recommended for most projects)
 # package-lock.json
 # yarn.lock
 # pnpm-lock.yaml

@@ -1,23 +1,20 @@
-# CI/CD Backend Rust (Template - Not Active)
-# Uncomment and configure when backend/rust is ready
-
 name: CI Backend Rust
 
 on:
   push:
     branches: [main, develop]
     paths:
-      - 'back/rust/**'
+      - 'back/rust-core/**'
       - '.github/workflows/ci-backend-rust.yml'
   pull_request:
     branches: [main, develop]
     paths:
-      - 'back/rust/**'
+      - 'back/rust-core/**'
       - '.github/workflows/ci-backend-rust.yml'
 
 defaults:
   run:
-    working-directory: back/rust
+    working-directory: back/rust-core
 
 jobs:
   lint-and-test:
@@ -33,23 +30,10 @@ jobs:
         with:
           components: rustfmt, clippy
 
-      - name: Cache cargo registry
-        uses: actions/cache@v4
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@v2
         with:
-          path: ~/.cargo/registry
-          key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
-
-      - name: Cache cargo index
-        uses: actions/cache@v4
-        with:
-          path: ~/.cargo/git
-          key: ${{ runner.os }}-cargo-index-${{ hashFiles('**/Cargo.lock') }}
-
-      - name: Cache cargo build
-        uses: actions/cache@v4
-        with:
-          path: back/rust/target
-          key: ${{ runner.os }}-cargo-build-${{ hashFiles('**/Cargo.lock') }}
+          workspaces: "back/rust-core -> target"
 
       - name: Check formatting
         run: cargo fmt -- --check
@@ -69,7 +53,7 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
-          file: ./back/rust/cobertura.xml
+          file: ./back/rust-core/cobertura.xml
           flags: backend-rust
           name: backend-rust-coverage
 
@@ -91,6 +75,8 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: rust-binary
-          path: back/rust/target/release/
+          name: rust-binaries
+          path: |
+            back/rust-core/target/release/game-server
+            back/rust-core/target/release/websocket-server
           retention-days: 7
