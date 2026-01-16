@@ -127,7 +127,7 @@ export default function ProfilePage() {
   const getAvatarImagePath = () => {
     if (!user.faction || !user.avatar) return "";
     const factionFolder = user.faction.toLowerCase().replace(" ", "-");
-    return `/icons/heroes/${factionFolder}/${user.avatar}.svg`;
+    return `/icons/heroes/${factionFolder}/${user.avatar}.png`;
   };
 
   const getAvatarFallback = () => {
@@ -234,16 +234,7 @@ export default function ProfilePage() {
                         height={128}
                         className="h-full w-full object-cover"
                         onError={() => {
-                          // Try .png fallback
-                          const img = document.querySelector(
-                            `img[alt="Avatar de ${user.nickname}"]`
-                          ) as HTMLImageElement;
-                          if (img && img.src.endsWith(".svg")) {
-                            const factionFolder = user.faction.toLowerCase().replace(" ", "-");
-                            img.src = `/icons/heroes/${factionFolder}/${user.avatar}.png`;
-                          } else {
-                            setImageError(true);
-                          }
+                          setImageError(true);
                         }}
                         priority
                       />

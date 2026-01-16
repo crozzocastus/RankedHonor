@@ -41,8 +41,7 @@ export function AvatarPicker({
 
   const getImagePath = (hero: Hero) => {
     const factionFolder = currentFaction.toLowerCase().replace(" ", "-");
-    // Try .svg first, will fallback to .png in onError
-    return `/icons/heroes/${factionFolder}/${hero.id}.svg`;
+    return `/icons/heroes/${factionFolder}/${hero.id}.png`;
   };
 
   const getFallbackInitials = (heroName: string) => {
@@ -96,18 +95,7 @@ export function AvatarPicker({
                         height={80}
                         className="rounded-lg object-cover"
                         onLoad={() => handleImageLoad(hero.id)}
-                        onError={() => {
-                          // Try .png fallback
-                          const img = document.querySelector(
-                            `img[alt="${hero.name}"]`
-                          ) as HTMLImageElement;
-                          if (img && img.src.endsWith(".svg")) {
-                            const factionFolder = currentFaction.toLowerCase().replace(" ", "-");
-                            img.src = `/icons/heroes/${factionFolder}/${hero.id}.png`;
-                          } else {
-                            handleImageError(hero.id);
-                          }
-                        }}
+                        onError={() => handleImageError(hero.id)}
                         priority={false}
                         loading="lazy"
                       />

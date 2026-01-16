@@ -30,7 +30,7 @@ export function Navbar({ onContentClick, onStatsClick }: NavbarProps) {
   const getAvatarImagePath = () => {
     if (!user?.faction || !user?.avatar) return "";
     const factionFolder = user.faction.toLowerCase().replace(" ", "-");
-    return `/icons/heroes/${factionFolder}/${user.avatar}.svg`;
+    return `/icons/heroes/${factionFolder}/${user.avatar}.png`;
   };
 
   const getAvatarFallback = () => {
@@ -138,17 +138,7 @@ export function Navbar({ onContentClick, onStatsClick }: NavbarProps) {
                         width={24}
                         height={24}
                         className="h-full w-full object-cover"
-                        onError={() => {
-                          const img = document.querySelector(
-                            `img[alt="Avatar de ${user.nickname}"]`
-                          ) as HTMLImageElement;
-                          if (img && img.src.endsWith(".svg")) {
-                            const factionFolder = user.faction.toLowerCase().replace(" ", "-");
-                            img.src = `/icons/heroes/${factionFolder}/${user.avatar}.png`;
-                          } else {
-                            setAvatarImageError(true);
-                          }
-                        }}
+                        onError={() => setAvatarImageError(true)}
                       />
                     ) : (
                       <div className="flex h-full w-full items-center justify-center rounded-full bg-gradient-to-br from-orange-500 to-red-600">
