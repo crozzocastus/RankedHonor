@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
+import { useMatchmaking } from "@/contexts/MatchmakingContext";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { DashboardHero } from "@/components/dashboard/DashboardHero";
@@ -14,6 +15,7 @@ import { Loader2 } from "lucide-react";
 
 export default function DashboardPage() {
   const { user, isLoading } = useAuth();
+  const { startSearch } = useMatchmaking();
   const router = useRouter();
   const [selectedRegion, setSelectedRegion] = useState("Global");
   const [isQuickRankedLoading, setIsQuickRankedLoading] = useState(false);
@@ -46,18 +48,16 @@ export default function DashboardPage() {
   }
 
   const handleQuickRankedClick = () => {
+    // Iniciar busca de partida global
+    startSearch("Ranqueada Rápida - 1v1", 90);
     setIsQuickRankedLoading(true);
     setQuickRankedStatus("Buscando partida...");
 
-    // Simular busca automática baseada na região e modo mais ativo
+    // Simular feedback rápido e depois deixar o FloatingMatchmaking gerenciar
     setTimeout(() => {
-      setQuickRankedStatus("Partida encontrada!");
-      setTimeout(() => {
-        setIsQuickRankedLoading(false);
-        setQuickRankedStatus("");
-        alert("Partida encontrada! (Mock - Ranqueada Rápida)");
-      }, 2000);
-    }, 3000);
+      setIsQuickRankedLoading(false);
+      setQuickRankedStatus("");
+    }, 2000);
   };
 
   const handleRankedClick = () => {
@@ -66,8 +66,8 @@ export default function DashboardPage() {
   };
 
   const handleContentClick = () => {
-    // Navegar para página de conteúdo ou rolar para seção de criadores
-    alert("Conteúdo - Criadores de conteúdo e lives");
+    // Navegar para página de conteúdo
+    router.push("/dashboard/content");
   };
 
   const handleStatsClick = () => {

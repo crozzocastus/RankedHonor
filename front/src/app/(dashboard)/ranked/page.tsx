@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useMatchmaking } from "@/contexts/MatchmakingContext";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,7 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Loader2, Swords, MapPin } from "lucide-react";
+import { Swords, MapPin, X } from "lucide-react";
 
 const gameModes = [
   { value: "duel", label: "Duelo (1x1)" },
@@ -33,35 +35,44 @@ const regions = [
 ];
 
 export default function RankedPage() {
+  const router = useRouter();
+  const { startSearch, cancelSearch, isSearching } = useMatchmaking();
   const [selectedMode, setSelectedMode] = useState("");
   const [selectedRegion, setSelectedRegion] = useState("player-region");
-  const [isSearching, setIsSearching] = useState(false);
-  const [searchStatus, setSearchStatus] = useState("");
 
   // Mock user - em produção viria do contexto de auth
   const currentUser = { name: "Jogador Teste", role: "player" };
 
+  const handleContentClick = () => {
+    router.push("/dashboard/content");
+  };
+
+  const handleStatsClick = () => {
+    alert("Rankings detalhados");
+  };
+
   const handleSearch = () => {
     if (!selectedMode) return;
 
-    setIsSearching(true);
-    setSearchStatus("Buscando partida...");
+    // Map game mode value to display name and estimated time
+    const modeConfig: Record<string, { name: string; estimatedTime: number }> = {
+      duel: { name: "Duelo (1x1)", estimatedTime: 60 },
+      brawl: { name: "Briga (2x2)", estimatedTime: 90 },
+      domination: { name: "Domínio (4x4)", estimatedTime: 120 },
+      invasion: { name: "Invasão", estimatedTime: 120 },
+      tribute: { name: "Tributo", estimatedTime: 120 },
+      elimination: { name: "Mata-mata", estimatedTime: 150 },
+    };
 
-    // Simular matchmaking
-    setTimeout(() => {
-      setSearchStatus("Partida encontrada!");
-      setTimeout(() => {
-        setIsSearching(false);
-        setSearchStatus("");
-        // Aqui seria navegação para a partida ou algo
-        alert("Partida encontrada! (Mock)");
-      }, 2000);
-    }, 3000);
+    const config = modeConfig[selectedMode];
+    if (config) {
+      startSearch(config.name, config.estimatedTime);
+    }
   };
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <Navbar />
+      <Navbar onContentClick={handleContentClick} onStatsClick={handleStatsClick} />
 
       <div className="container mx-auto max-w-[1440px] px-6 py-12">
         <div className="mb-8 text-center">
@@ -113,29 +124,26 @@ export default function RankedPage() {
               </div>
             </div>
 
-            <div className="flex justify-center">
-              <Button
-                onClick={handleSearch}
-                disabled={!selectedMode || isSearching}
-                className="bg-gradient-to-r from-orange-500 to-red-600 px-8 py-3 hover:from-orange-600 hover:to-red-700 disabled:bg-slate-600"
-              >
-                {isSearching ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    {searchStatus}
-                  </>
-                ) : (
-                  <>
-                    <Swords className="mr-2 h-4 w-4" />
-                    Buscar Partida
-                  </>
-                )}
-              </Button>
+            <div className="flex justify-center gap-4">
+              {!isSearching ? (
+                <Button
+                  onClick={handleSearch}
+                  disabled={!selectedMode}
+                  className="bg-gradient-to-r from-orange-500 to-red-600 px-8 py-3 hover:from-orange-600 hover:to-red-700 disabled:bg-slate-600"
+                >
+                  <Swords className="mr-2 h-4 w-4" />
+                  Buscar Partida
+                </Button>
+              ) : (
+                <Button
+                  onClick={cancelSearch}
+                  className="bg-red-600 px-8 py-3 hover:bg-red-700"
+                >
+                  <X className="mr-2 h-4 w-4" />
+                  Cancelar Busca
+                </Button>
+              )}
             </div>
-
-            {searchStatus && !isSearching && (
-              <div className="text-center font-medium text-green-400">{searchStatus}</div>
-            )}
           </CardContent>
         </Card>
       </div>
