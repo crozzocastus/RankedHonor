@@ -1,10 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: "export",
+  basePath: "/RankedHonor",
+  assetPrefix: "/RankedHonor",
   images: {
-    // Allow images from public directory
-    unoptimized: false,
-    formats: ["image/avif", "image/webp"],
+    // Unoptimized for static export - images will be pre-processed before build
+    unoptimized: true,
   },
 };
 
