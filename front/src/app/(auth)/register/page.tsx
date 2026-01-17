@@ -79,7 +79,7 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <Navbar />
+      <Navbar variant="landing" />
 
       <div className="container mx-auto max-w-[1440px] px-6 py-16">
         <div className="mx-auto max-w-md">
@@ -87,7 +87,7 @@ export default function RegisterPage() {
           <div className="mb-8 text-center">
             <div className="mb-4 flex items-center justify-center gap-3">
               <Sword className="h-12 w-12 text-orange-500" />
-              <h1 className="text-3xl font-bold text-orange-500">FOR HONOR RANKED</h1>
+              <h1 className="text-3xl font-bold text-orange-500">RANKED HONOR</h1>
             </div>
             <h2 className="mb-2 text-2xl font-bold text-white">Criar Conta</h2>
             <p className="text-gray-400">Junte-se à comunidade competitiva de For Honor</p>

@@ -18,6 +18,8 @@ import {
 } from 'lucide-react';
 import { Post } from '@/types/content';
 import { PostInteractions } from '@/components/content/PostInteractions';
+import { useAuth } from '@/contexts/AuthContext';
+import { toast } from 'sonner';
 
 interface ContentCardProps {
   post: Post;
@@ -25,6 +27,7 @@ interface ContentCardProps {
 }
 
 export function ContentCard({ post, isActive }: ContentCardProps) {
+  const { user } = useAuth();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isFollowing, setIsFollowing] = useState(post.isFollowing);
@@ -287,7 +290,13 @@ export function ContentCard({ post, isActive }: ContentCardProps) {
             
             {/* Follow Button */}
             <button
-              onClick={() => setIsFollowing(!isFollowing)}
+              onClick={() => {
+                if (!user) {
+                  toast.error('Faça login para seguir criadores');
+                  return;
+                }
+                setIsFollowing(!isFollowing);
+              }}
               className={`ml-3 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-200 flex items-center gap-2 whitespace-nowrap flex-shrink-0 ${
                 isFollowing
                   ? 'bg-gray-800/80 text-gray-300 border border-gray-700/50 hover:bg-gray-700/80'

@@ -1,10 +1,6 @@
 import { Radio, Eye, TrendingUp, Play } from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 
-interface MainFeedProps {
-  region: string;
-}
-
 const liveStreams = [
   {
     id: 1,
@@ -63,7 +59,7 @@ const highlights = [
   },
 ];
 
-export function MainFeed({ region }: MainFeedProps) {
+export function MainFeed() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">

@@ -102,7 +102,9 @@ export function Footer() {
               <MessageCircle className="h-5 w-5 text-gray-500 hover:text-orange-500" />
             </a>
             <a
-              href="#"
+              href="https://github.com/crozzocastus/RankedHonor"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex h-10 w-10 items-center justify-center rounded-lg border border-gray-800 bg-gray-900 transition-all hover:border-orange-500/30 hover:bg-orange-500/20"
             >
               <Github className="h-5 w-5 text-gray-500 hover:text-orange-500" />

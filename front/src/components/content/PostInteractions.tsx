@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Heart, MessageCircle, Share2, Bookmark, Send, X } from 'lucide-react';
 import { Post, Comment } from '@/types/content';
+import { useAuth } from '@/contexts/AuthContext';
+import { toast } from 'sonner';
 
 
 interface PostInteractionsProps {
@@ -11,6 +13,7 @@ interface PostInteractionsProps {
 }
 
 export function PostInteractions({ post }: PostInteractionsProps) {
+  const { user } = useAuth();
   const [isLiked, setIsLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   const [showComments, setShowComments] = useState(false);
@@ -28,6 +31,11 @@ export function PostInteractions({ post }: PostInteractionsProps) {
   }, [post.id]);
 
   const handleLike = () => {
+    if (!user) {
+      toast.error('Faça login para curtir');
+      return;
+    }
+
     const newLikedState = !isLiked;
     setIsLiked(newLikedState);
     setLikeCount(prev => newLikedState ? prev + 1 : prev - 1);
@@ -46,6 +54,11 @@ export function PostInteractions({ post }: PostInteractionsProps) {
   };
 
   const handleSave = () => {
+    if (!user) {
+      toast.error('Faça login para salvar');
+      return;
+    }
+
     const newSavedState = !isSaved;
     setIsSaved(newSavedState);
 
@@ -84,14 +97,26 @@ export function PostInteractions({ post }: PostInteractionsProps) {
       icon: MessageCircle,
       count: post.comments,
       active: showComments,
-      onClick: () => setShowComments(!showComments),
+      onClick: () => {
+        if (!user) {
+          toast.error('Faça login para comentar');
+          return;
+        }
+        setShowComments(!showComments);
+      },
       label: 'Comentar',
     },
     {
       icon: Share2,
       count: post.shares,
       active: showShare,
-      onClick: () => setShowShare(!showShare),
+      onClick: () => {
+        if (!user) {
+          toast.error('Faça login para compartilhar');
+          return;
+        }
+        setShowShare(!showShare);
+      },
       label: 'Compartilhar',
     },
     {
@@ -183,25 +208,37 @@ export function PostInteractions({ post }: PostInteractionsProps) {
 
             {/* Comment Input */}
             <div className="p-4 border-t border-gray-800">
-              <div className="flex items-center gap-3">
-                <div className="relative w-8 h-8 rounded-full border border-gray-700 overflow-hidden flex-shrink-0">
-                  <Image
-                    src="https://i.pravatar.cc/150?img=70"
-                    alt="Você"
-                    fill
-                    className="object-cover"
-                    sizes="32px"
+              {user ? (
+                <div className="flex items-center gap-3">
+                  <div className="relative w-8 h-8 rounded-full border border-gray-700 overflow-hidden flex-shrink-0">
+                    <Image
+                      src="https://i.pravatar.cc/150?img=70"
+                      alt="Você"
+                      fill
+                      className="object-cover"
+                      sizes="32px"
+                    />
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Adicione um comentário..."
+                    className="flex-1 bg-gray-800 text-white px-4 py-2 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/50 border border-gray-700"
                   />
+                  <button className="w-10 h-10 bg-gradient-to-r from-orange-500 to-red-600 rounded-full flex items-center justify-center hover:from-orange-400 hover:to-red-500 transition-all shadow-lg shadow-orange-500/20">
+                    <Send className="w-5 h-5 text-white" />
+                  </button>
                 </div>
-                <input
-                  type="text"
-                  placeholder="Adicione um comentário..."
-                  className="flex-1 bg-gray-800 text-white px-4 py-2 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/50 border border-gray-700"
-                />
-                <button className="w-10 h-10 bg-gradient-to-r from-orange-500 to-red-600 rounded-full flex items-center justify-center hover:from-orange-400 hover:to-red-500 transition-all shadow-lg shadow-orange-500/20">
-                  <Send className="w-5 h-5 text-white" />
-                </button>
-              </div>
+              ) : (
+                <div className="text-center py-4">
+                  <p className="text-gray-400 text-sm mb-3">Faça login para comentar</p>
+                  <button
+                    onClick={() => window.location.href = '/login'}
+                    className="px-6 py-2 bg-gradient-to-r from-orange-500 to-red-600 text-white text-sm font-semibold rounded-lg hover:from-orange-400 hover:to-red-500 transition-all"
+                  >
+                    Fazer Login
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -3,9 +3,10 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
-import { Header } from "@/components/layout/Header";
+import { Navbar } from "@/components/layout/Navbar";
 import { HeroSection } from "@/components/landing/HeroSection";
 import { QuickActions } from "@/components/landing/QuickActions";
+import { HowItWorks } from "@/components/landing/HowItWorks";
 import { MainFeed } from "@/components/landing/MainFeed";
 import { Sidebar } from "@/components/landing/Sidebar";
 import { RankingsSection } from "@/components/landing/RankingsSection";
@@ -18,7 +19,6 @@ import { Footer } from "@/components/layout/Footer";
 export default function Home() {
   const { user, isLoading } = useAuth();
   const router = useRouter();
-  const [selectedRegion, setSelectedRegion] = useState("Global");
 
   // Se já estiver logado, redirecionar para dashboard
   useEffect(() => {
@@ -46,21 +46,22 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <Header
+      <Navbar
+        variant="landing"
         onLoginClick={() => router.push("/login")}
         onRegisterClick={() => router.push("/register")}
-        selectedRegion={selectedRegion}
-        onRegionChange={setSelectedRegion}
       />
 
       <HeroSection onPlayNow={() => router.push("/register")} />
 
       <QuickActions />
 
+      <HowItWorks />
+
       <div className="container mx-auto max-w-[1440px] px-6 py-12">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_380px]">
-          <MainFeed region={selectedRegion} />
-          <Sidebar region={selectedRegion} />
+          <MainFeed />
+          <Sidebar />
         </div>
       </div>
 

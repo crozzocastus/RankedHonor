@@ -5,8 +5,10 @@ import { Filter, Users, Video, Image as ImageIcon, Mic, FileText, Radio } from '
 import { ContentCard } from '@/components/content/ContentCard';
 import { mockPosts } from '@/data/mockPosts';
 import { ContentFilter } from '@/types/content';
+import { useAuth } from '@/contexts/AuthContext';
 
 export function ContentFeed() {
+  const { user } = useAuth();
   const [activeFilter, setActiveFilter] = useState<ContentFilter>('all');
   const [currentPostIndex, setCurrentPostIndex] = useState(0);
   const [isScrolling, setIsScrolling] = useState(false);
@@ -71,7 +73,7 @@ export function ContentFeed() {
 
   const filterButtons: Array<{ type: ContentFilter; label: string; icon: React.ReactNode }> = [
     { type: 'all', label: 'Todos', icon: <Filter className="w-4 h-4" /> },
-    { type: 'following', label: 'Seguindo', icon: <Users className="w-4 h-4" /> },
+    ...(user ? [{ type: 'following' as ContentFilter, label: 'Seguindo', icon: <Users className="w-4 h-4" /> }] : []),
     { type: 'videos', label: 'Vídeos', icon: <Video className="w-4 h-4" /> },
     { type: 'live', label: 'Ao Vivo', icon: <Radio className="w-4 h-4" /> },
     { type: 'images', label: 'Imagens', icon: <ImageIcon className="w-4 h-4" /> },

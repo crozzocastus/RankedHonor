@@ -17,7 +17,6 @@ export default function DashboardPage() {
   const { user, isLoading } = useAuth();
   const { startSearch } = useMatchmaking();
   const router = useRouter();
-  const [selectedRegion, setSelectedRegion] = useState("Global");
   const [isQuickRankedLoading, setIsQuickRankedLoading] = useState(false);
   const [quickRankedStatus, setQuickRankedStatus] = useState("");
 
@@ -27,13 +26,6 @@ export default function DashboardPage() {
       router.push("/login");
     }
   }, [user, isLoading, router]);
-
-  // Atualizar região quando o usuário carregar
-  useEffect(() => {
-    if (user) {
-      setSelectedRegion(user.region || "Global");
-    }
-  }, [user]);
 
   // Se ainda está carregando ou não há usuário, mostrar loading
   if (isLoading || !user) {
@@ -77,7 +69,7 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <Navbar onContentClick={handleContentClick} onStatsClick={handleStatsClick} />
+      <Navbar variant="dashboard" onContentClick={handleContentClick} onStatsClick={handleStatsClick} />
 
       {/* Dashboard Hero - Elementos principais mantidos no topo */}
       <DashboardHero
@@ -106,8 +98,8 @@ export default function DashboardPage() {
       {/* Main Feed e Sidebar - Mantidos para consistência */}
       <div className="container mx-auto max-w-[1440px] px-6 py-12">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_380px]">
-          <MainFeed region={selectedRegion} />
-          <Sidebar region={selectedRegion} />
+          <MainFeed />
+          <Sidebar />
         </div>
       </div>
 

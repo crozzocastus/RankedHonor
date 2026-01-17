@@ -72,7 +72,7 @@ export default function RankedPage() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <Navbar onContentClick={handleContentClick} onStatsClick={handleStatsClick} />
+      <Navbar variant="dashboard" onContentClick={handleContentClick} onStatsClick={handleStatsClick} />
 
       <div className="container mx-auto max-w-[1440px] px-6 py-12">
         <div className="mb-8 text-center">

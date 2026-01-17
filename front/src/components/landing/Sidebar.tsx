@@ -1,9 +1,5 @@
 import { Users, Trophy, Crown, Medal, Award } from "lucide-react";
 
-interface SidebarProps {
-  region: string;
-}
-
 const activePlayers = [
   { nickname: "WarLegend", mode: "Duelo 1v1", region: "EU" },
   { nickname: "IronFist", mode: "Briga 2v2", region: "NA" },
@@ -30,7 +26,7 @@ const topTeams = [
 
 const rankIcons = [Crown, Medal, Award, Trophy, Trophy];
 
-export function Sidebar({ region }: SidebarProps) {
+export function Sidebar() {
   return (
     <div className="sticky top-24 space-y-6">
       {/* Active Players */}

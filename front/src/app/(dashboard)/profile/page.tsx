@@ -160,9 +160,17 @@ export default function ProfilePage() {
     return rankIcons.bronze;
   };
 
+  const handleContentClick = () => {
+    router.push("/dashboard/content");
+  };
+
+  const handleStatsClick = () => {
+    alert("Rankings detalhados");
+  };
+
   return (
     <div className="min-h-screen bg-black text-white">
-      <Navbar />
+      <Navbar variant="dashboard" onContentClick={handleContentClick} onStatsClick={handleStatsClick} />
 
       <div className="container mx-auto max-w-[1440px] px-6 py-8">
         {/* Header do Perfil */}
