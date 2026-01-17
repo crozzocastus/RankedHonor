@@ -161,7 +161,7 @@ export default function ProfilePage() {
   };
 
   const handleContentClick = () => {
-    router.push("/dashboard/content");
+    router.push("/content");
   };
 
   const handleStatsClick = () => {

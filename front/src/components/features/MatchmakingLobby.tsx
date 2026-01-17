@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, memo } from "react";
 import { MatchmakingLobby as LobbyType, ChatMessage, MapRole, HeroClass } from "@/types";
 import { PlayerProfileCard } from "./PlayerProfileCard";
 import { MapRoleSelector } from "./MapRoleSelector";
@@ -21,7 +21,7 @@ interface MatchmakingLobbyProps {
   followedUsers?: Set<string>;
 }
 
-export function MatchmakingLobby({
+function MatchmakingLobbyComponent({
   lobby,
   currentUserId,
   onRoleSelect,
@@ -107,7 +107,6 @@ export function MatchmakingLobby({
               startedAt={lobby.preparationStartedAt}
               durationSeconds={lobby.preparationTimeSeconds || 60}
               onComplete={() => {
-                console.log('Preparation complete, starting match!');
                 // TODO: Iniciar partida
               }}
             />
@@ -332,3 +331,5 @@ export function MatchmakingLobby({
     </div>
   );
 }
+
+export const MatchmakingLobby = memo(MatchmakingLobbyComponent);

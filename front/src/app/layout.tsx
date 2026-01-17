@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
-import { MatchmakingProvider } from "@/contexts/MatchmakingContext";
+import { SearchProvider } from "@/contexts/SearchContext";
+import { LobbyProvider } from "@/contexts/LobbyContext";
+import { PlayerPreferencesProvider } from "@/contexts/PlayerPreferencesContext";
 import { FloatingMatchmaking } from "@/components/shared/FloatingMatchmaking";
 
 const inter = Inter({ 
@@ -25,10 +27,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="pt-BR">
       <body className={`${inter.variable} font-sans`}>
         <AuthProvider>
-          <MatchmakingProvider>
-            {children}
-            <FloatingMatchmaking />
-          </MatchmakingProvider>
+          <SearchProvider>
+            <LobbyProvider>
+              <PlayerPreferencesProvider>
+                {children}
+                <FloatingMatchmaking />
+              </PlayerPreferencesProvider>
+            </LobbyProvider>
+          </SearchProvider>
         </AuthProvider>
       </body>
     </html>

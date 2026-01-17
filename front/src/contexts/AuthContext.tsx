@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, useCallback, useMemo, ReactNode } from "react";
 import type { User, AuthContextType } from "@/types";
 import {
   loginUser,
@@ -36,7 +36,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     saveUser(user);
   }, [user]);
 
-  const login = async (nickname: string, password: string): Promise<boolean> => {
+  const login = useCallback(async (nickname: string, password: string): Promise<boolean> => {
     setIsLoading(true);
     const foundUser = await loginUser(nickname, password);
     if (foundUser) {
@@ -46,9 +46,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
     setIsLoading(false);
     return false;
-  };
+  }, []);
 
-  const register = async (
+  const register = useCallback(async (
     nickname: string,
     email: string,
     password: string,
@@ -63,54 +63,58 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
     setIsLoading(false);
     return false;
-  };
+  }, []);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     setUser(null);
-  };
+  }, []);
 
-  const updateProfile = (updates: Partial<User>) => {
-    if (user) {
-      const updatedUser = { ...user, ...updates };
-      setUser(updatedUser);
-      updateUserInMockData(user.id, updates);
+  const updateProfile = useCallback((updates: Partial<User>) => {
+    setUser(prevUser => {
+      if (!prevUser) return null;
+      const updatedUser = { ...prevUser, ...updates };
+      updateUserInMockData(prevUser.id, updates);
       
       // Update cache if faction or avatar changed
       if (updates.faction) {
-        saveFactionToCache(user.id, updates.faction);
+        saveFactionToCache(prevUser.id, updates.faction);
       }
       if (updates.avatar) {
-        saveAvatarToCache(user.id, updates.avatar);
+        saveAvatarToCache(prevUser.id, updates.avatar);
       }
-    }
-  };
+      
+      return updatedUser;
+    });
+  }, []);
 
-  const changeFaction = (newFaction: Faction) => {
-    if (user) {
+  const changeFaction = useCallback((newFaction: Faction) => {
+    setUser(prevUser => {
+      if (!prevUser) return null;
       const newAvatar = DEFAULT_HEROES_BY_FACTION[newFaction];
       const updates = { faction: newFaction, avatar: newAvatar };
-      const updatedUser = { ...user, ...updates };
-      setUser(updatedUser);
-      updateUserInMockData(user.id, updates);
+      const updatedUser = { ...prevUser, ...updates };
+      updateUserInMockData(prevUser.id, updates);
       
       // Update cache
-      saveFactionToCache(user.id, newFaction);
-      saveAvatarToCache(user.id, newAvatar);
-    }
-  };
+      saveFactionToCache(prevUser.id, newFaction);
+      saveAvatarToCache(prevUser.id, newAvatar);
+      
+      return updatedUser;
+    });
+  }, []);
+
+  const value = useMemo(() => ({
+    user,
+    login,
+    register,
+    logout,
+    updateProfile,
+    changeFaction,
+    isLoading,
+  }), [user, login, register, logout, updateProfile, changeFaction, isLoading]);
 
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        login,
-        register,
-        logout,
-        updateProfile,
-        changeFaction,
-        isLoading,
-      }}
-    >
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );

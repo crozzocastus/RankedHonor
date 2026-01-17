@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useMatchmaking } from "@/contexts/MatchmakingContext";
+import { useMatchmakingOrchestrator } from "@/contexts/useMatchmakingOrchestrator";
+import { useLobby } from "@/contexts/LobbyContext";
+import { usePlayerPreferences } from "@/contexts/PlayerPreferencesContext";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { MatchmakingLobby } from "@/components/features/MatchmakingLobby";
@@ -37,24 +39,21 @@ const regions = [
 
 export default function RankedPage() {
   const router = useRouter();
+  const { startSearch, cancelSearch, isSearching } = useMatchmakingOrchestrator();
+  const { currentLobby, sendChatMessage } = useLobby();
   const { 
-    startSearch, 
-    cancelSearch, 
-    isSearching, 
-    currentLobby,
-    selectRole,
-    selectHero,
-    togglePreferredClass,
-    sendChatMessage,
-    followUser,
-    unfollowUser,
-    followedUsers
-  } = useMatchmaking();
+    selectRole, 
+    selectHero, 
+    togglePreferredClass, 
+    followUser, 
+    unfollowUser, 
+    followedUsers 
+  } = usePlayerPreferences();
   const [selectedMode, setSelectedMode] = useState("");
   const [selectedRegion, setSelectedRegion] = useState("player-region");
 
   const handleContentClick = () => {
-    router.push("/dashboard/content");
+    router.push("/content");
   };
 
   const handleStatsClick = () => {

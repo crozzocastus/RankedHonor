@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
-import { useMatchmaking } from "@/contexts/MatchmakingContext";
+import { useMatchmakingOrchestrator } from "@/contexts/useMatchmakingOrchestrator";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { DashboardHero } from "@/components/dashboard/DashboardHero";
@@ -15,7 +15,7 @@ import { Loader2 } from "lucide-react";
 
 export default function DashboardPage() {
   const { user, isLoading } = useAuth();
-  const { startSearch } = useMatchmaking();
+  const { startSearch } = useMatchmakingOrchestrator();
   const router = useRouter();
   const [isQuickRankedLoading, setIsQuickRankedLoading] = useState(false);
   const [quickRankedStatus, setQuickRankedStatus] = useState("");
@@ -59,7 +59,7 @@ export default function DashboardPage() {
 
   const handleContentClick = () => {
     // Navegar para página de conteúdo
-    router.push("/dashboard/content");
+    router.push("/content");
   };
 
   const handleStatsClick = () => {

@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react';
-import { useMatchmaking } from '@/contexts/MatchmakingContext';
+import { useState, useEffect, useRef, memo } from 'react';
+import { useSearch } from '@/contexts/SearchContext';
 import { Loader2, Clock, Minimize2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
-export function FloatingMatchmaking() {
-  const { isSearching, searchStartTime, estimatedTime, gameMode, cancelSearch, completeSearch } = useMatchmaking();
+function FloatingMatchmakingComponent() {
+  const { isSearching, searchStartTime, estimatedTime, gameMode, cancelSearch, completeSearch } = useSearch();
   const [elapsedTime, setElapsedTime] = useState(0);
   const [isHidden, setIsHidden] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -14,8 +14,6 @@ export function FloatingMatchmaking() {
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const router = useRouter();
   const widgetRef = useRef<HTMLDivElement>(null);
-
-  console.log('FloatingMatchmaking render:', { isSearching, searchStartTime, gameMode });
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -172,3 +170,5 @@ export function FloatingMatchmaking() {
     </div>
   );
 }
+
+export const FloatingMatchmaking = memo(FloatingMatchmakingComponent);

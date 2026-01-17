@@ -59,7 +59,6 @@ export function HowItWorks() {
     <section id="como-funciona" className="relative bg-black py-24">
       {/* Background effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-orange-950/5 to-black" />
-      <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5" />
 
       <div className="container relative mx-auto max-w-[1440px] px-6">
         {/* Header */}

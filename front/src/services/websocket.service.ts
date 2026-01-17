@@ -65,7 +65,6 @@ export class WebSocketService {
         this.ws = new WebSocket(wsUrl);
 
         this.ws.onopen = () => {
-          console.log("✅ WebSocket conectado");
           this.reconnectAttempts = 0;
           this.emit(WebSocketEventType.CONNECT, { userId });
           resolve();
@@ -74,21 +73,18 @@ export class WebSocketService {
         this.ws.onmessage = (event) => {
           try {
             const message: WebSocketMessage = JSON.parse(event.data);
-            console.log("📩 WebSocket message:", message);
             this.handleMessage(message);
           } catch (error) {
-            console.error("❌ Erro ao processar mensagem WebSocket:", error);
+            // Erro ao processar mensagem WebSocket
           }
         };
 
         this.ws.onerror = (error) => {
-          console.error("❌ WebSocket error:", error);
           this.emit(WebSocketEventType.ERROR, error);
           reject(error);
         };
 
         this.ws.onclose = (event) => {
-          console.log("🔌 WebSocket desconectado", event.code, event.reason);
           this.emit(WebSocketEventType.DISCONNECT, {
             code: event.code,
             reason: event.reason,
@@ -129,13 +125,10 @@ export class WebSocketService {
    */
   private attemptReconnect(userId: string, token: string) {
     this.reconnectAttempts++;
-    console.log(
-      `🔄 Tentando reconectar... (${this.reconnectAttempts}/${this.maxReconnectAttempts})`
-    );
 
     setTimeout(() => {
       this.connect(userId, token).catch((error) => {
-        console.error("❌ Falha ao reconectar:", error);
+        // Falha ao reconectar
       });
     }, this.reconnectDelay * this.reconnectAttempts);
   }
@@ -145,7 +138,6 @@ export class WebSocketService {
    */
   send(type: WebSocketEventType, data: any) {
     if (!this.ws || this.ws.readyState !== WebSocket.OPEN) {
-      console.error("❌ WebSocket não está conectado");
       return;
     }
 
@@ -156,7 +148,6 @@ export class WebSocketService {
     };
 
     this.ws.send(JSON.stringify(message));
-    console.log("📤 WebSocket send:", message);
   }
 
   /**
