@@ -25,4 +25,6 @@ export interface User {
   avatar: string;
   profileVisibility: "public" | "private";
   stats?: UserStats;
+  ubisoftId?: string;
+  inGameNick?: string;
 }

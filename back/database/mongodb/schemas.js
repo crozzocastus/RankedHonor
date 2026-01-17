@@ -172,6 +172,92 @@ db.matchmaking_queue.createIndex({ "joined_at": 1 }, { expireAfterSeconds: 600 }
 */
 
 // ============================================================================
+// MATCHMAKING LOBBIES
+// ============================================================================
+
+db.createCollection("matchmaking_lobbies");
+
+db.matchmaking_lobbies.createIndex({ "lobby_id": 1 }, { unique: true });
+db.matchmaking_lobbies.createIndex({ "created_at": 1 });
+db.matchmaking_lobbies.createIndex({ "created_at": 1 }, { expireAfterSeconds: 1800 }); // Auto-remove after 30 min
+
+// Example document
+/*
+{
+  "_id": ObjectId("..."),
+  "lobby_id": "lobby-uuid-here",
+  "game_mode": "dominio",
+  "region": "SA",
+  "max_players": 8,
+  "players": [
+    {
+      "user_id": "user-uuid-1",
+      "nickname": "KnightSlayer",
+      "avatar": "warden",
+      "faction": "Knights",
+      "rank": "Diamante II",
+      "role": "mid",
+      "team_id": 1,
+      "ubisoft_id": "KnightSlayer#1234",
+      "in_game_nick": "KS_Pro",
+      "profile_visibility": "public",
+      "joined_at": ISODate("2026-01-15T10:00:00Z")
+    },
+    {
+      "user_id": "user-uuid-2",
+      "nickname": "VikingWarrior",
+      "avatar": "raider",
+      "faction": "Vikings",
+      "rank": "Platina I",
+      "role": "base",
+      "team_id": 1,
+      "ubisoft_id": "VikingW#5678",
+      "in_game_nick": "VW_Legend",
+      "profile_visibility": "private",
+      "joined_at": ISODate("2026-01-15T10:00:30Z")
+    }
+  ],
+  "chat_messages": [
+    {
+      "message_id": "msg-uuid-1",
+      "user_id": "user-uuid-1",
+      "nickname": "KnightSlayer",
+      "message": "Boa sorte a todos!",
+      "timestamp": ISODate("2026-01-15T10:01:00Z"),
+      "is_moderated": false
+    }
+  ],
+  "created_at": ISODate("2026-01-15T10:00:00Z"),
+  "match_found_at": null
+}
+*/
+
+// ============================================================================
+// CHAT MODERATION
+// ============================================================================
+
+db.createCollection("chat_moderation_logs");
+
+db.chat_moderation_logs.createIndex({ "user_id": 1, "timestamp": -1 });
+db.chat_moderation_logs.createIndex({ "lobby_id": 1 });
+db.chat_moderation_logs.createIndex({ "timestamp": -1 });
+db.chat_moderation_logs.createIndex({ "timestamp": 1 }, { expireAfterSeconds: 2592000 }); // 30 days
+
+// Example document
+/*
+{
+  "_id": ObjectId("..."),
+  "user_id": "uuid-here",
+  "lobby_id": "lobby-uuid",
+  "original_message": "mensagem com palavrão",
+  "moderated_message": "mensagem com ****",
+  "reason": "profanity",
+  "severity": "low",
+  "timestamp": ISODate("2026-01-15T10:00:00Z")
+}
+*/
+
+// ============================================================================
 // NOTIFICATIONS
 // ============================================================================
 

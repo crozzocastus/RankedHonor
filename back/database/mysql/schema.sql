@@ -16,12 +16,15 @@ CREATE TABLE IF NOT EXISTS users (
     avatar VARCHAR(100) NOT NULL DEFAULT 'warden',
     profile_visibility ENUM('public', 'private') NOT NULL DEFAULT 'public',
     email_verified BOOLEAN NOT NULL DEFAULT FALSE,
+    ubisoft_id VARCHAR(100) NULL UNIQUE,
+    in_game_nick VARCHAR(50) NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     
     INDEX idx_email (email),
     INDEX idx_nickname (nickname),
     INDEX idx_faction (faction),
+    INDEX idx_ubisoft_id (ubisoft_id),
     INDEX idx_created_at (created_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

@@ -41,7 +41,7 @@ export default function DashboardPage() {
 
   const handleQuickRankedClick = () => {
     // Iniciar busca de partida global
-    startSearch("Ranqueada Rápida - 1v1", 90);
+    startSearch("Ranqueada Rápida - 1v1", "Global", 90);
     setIsQuickRankedLoading(true);
     setQuickRankedStatus("Buscando partida...");
 
