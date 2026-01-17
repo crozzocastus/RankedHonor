@@ -87,7 +87,29 @@ O projeto usa Husky para git hooks automáticos:
 
 - **pre-commit:** Roda lint-staged (ESLint + Prettier em arquivos modificados)
 
-## 📁 Project Structure
+## � Code Organization Guidelines
+
+Para manter o código legível e manutenível, seguimos estas diretrizes:
+
+### File Size Limit
+- **Máximo recomendado:** ~200 linhas por arquivo
+- **Razão:** Arquivos menores são mais fáceis de entender, testar e manter
+- **Quando refatorar:** Se um arquivo ultrapassar 200-250 linhas, considere dividir em componentes menores ou extrair lógica para utilitários/services
+
+### Component Structure
+- Extrair lógica complexa para hooks customizados
+- Mover helpers/utilitários para `lib/utils/`
+- Separar componentes grandes em subcomponentes
+- Usar services para gerenciamento de dados e cache
+
+### Benefits
+- ✅ Melhor legibilidade e navegabilidade
+- ✅ Facilita code reviews
+- ✅ Reduz acoplamento e melhora testabilidade
+- ✅ Promove reutilização de código
+- ✅ Facilita manutenção futura
+
+## �📁 Project Structure
 
 ```
 front/
