@@ -22,40 +22,9 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@/types": [
-        "./src/types"
-      ],
-      "@/types/*": [
-        "./src/types/*"
-      ],
-      "@/lib": [
-        "./src/lib"
-      ],
-      "@/lib/*": [
-        "./src/lib/*"
-      ],
-      "@/hooks": [
-        "./src/hooks"
-      ],
-      "@/hooks/*": [
-        "./src/hooks/*"
-      ],
-      "@/services": [
-        "./src/services"
-      ],
-      "@/services/*": [
-        "./src/services/*"
-      ],
-      "@/utils": [
-        "./src/utils"
-      ],
-      "@/utils/*": [
-        "./src/utils/*"
-      ]
+      "@/*": ["src/*"]
     }
   },
   "include": [
