@@ -1,4 +1,7 @@
+
 # Python API - RankedHonor Backend
+
+> **Nota:** Este README segue o [template padronizado](../../docs/guias/README_TEMPLATE.md). Mantenha sempre os tópicos obrigatórios atualizados!
 
 FastAPI-based REST API for RankedHonor platform. Handles user management, integrations, and proxies requests to Rust services.
 

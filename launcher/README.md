@@ -1,4 +1,7 @@
+
 # 🚀 RankedHonor Launcher
+
+> **Nota:** Este README segue o [template padronizado](../docs/guias/README_TEMPLATE.md). Mantenha sempre os tópicos obrigatórios atualizados!
 
 O **RankedHonor Launcher** é o componente central da plataforma - um aplicativo desktop leve e não-invasivo que detecta quando você está jogando For Honor, captura automaticamente os resultados das suas partidas via screenshot + OCR/IA local, e envia os dados para a plataforma para análise.
 

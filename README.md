@@ -28,9 +28,31 @@ RankedHonor/
 
 | Componente | Status | Stack | CI/CD |
 |------------|--------|-------|-------|
+
 | **Frontend** | ✅ Ativo | Next.js 16 + React 19 + TypeScript | ✅ Configurado |
 | **Backend** | 🚧 Planejado | Rust + Python | 📋 Template pronto |
 | **Launcher** | 🚧 Planejado | Electron/Tauri | 📋 Template pronto |
+
+## 🧭 Onboarding e Contribuição
+
+Se você é novo(a), siga estes passos:
+
+1. Leia o [Guia de Contribuição](docs/guias/CONTRIBUINDO.md)
+2. Escolha uma stack (frontend, backend, launcher)
+3. Veja os próximos passos e funcionalidades em falta abaixo
+4. Consulte o [Project Board](https://github.com/crozzo/RankedHonor/projects) para tarefas abertas
+5. Abra uma issue ou comente para sinalizar interesse
+
+### Próximos Passos / Funcionalidades em Falta
+
+- Integração real frontend ↔ backend
+- Sistema de autenticação completo (NextAuth)
+- Testes unitários e cobertura >70%
+- Backend: endpoints de autenticação, matches, rankings
+- Launcher: detecção de processo, OCR, integração backend
+- Veja lista detalhada no [Status do Projeto](docs/STATUS_PROJETO.md)
+
+---
 
 ## 🚀 Quick Start
 

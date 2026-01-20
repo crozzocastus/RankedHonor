@@ -1,4 +1,7 @@
+
 # RankedHonor Backend
+
+> **Nota:** Este README segue o [template padronizado](../docs/guias/README_TEMPLATE.md). Mantenha sempre os tópicos obrigatórios atualizados!
 
 > High-performance backend for RankedHonor competitive gaming platform combining Rust (performance) and Python (rapid development).
 

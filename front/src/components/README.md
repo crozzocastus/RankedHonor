@@ -1,4 +1,7 @@
+
 # Components Directory / Diretório de Componentes
+
+> **Nota:** Este README segue o [template padronizado](../../../docs/guias/README_TEMPLATE.md). Mantenha sempre os tópicos obrigatórios atualizados!
 
 ## English
 

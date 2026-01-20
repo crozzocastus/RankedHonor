@@ -1,6 +1,17 @@
+
 # 📚 Índice de Documentação - RankedHonor
 
-Bem-vindo à documentação completa do **RankedHonor**, uma plataforma de estatísticas avançadas e comunidade para jogadores de For Honor.
+Bem-vindo à documentação completa do **RankedHonor**!
+
+## 🚦 Primeiros Passos para Novos Desenvolvedores
+
+1. **Leia o [Guia de Contribuição](docs/guias/CONTRIBUINDO.md)** para entender o fluxo, padrões e como escolher tarefas.
+2. Consulte o [Project Board do GitHub](https://github.com/crozzo/RankedHonor/projects) para ver tarefas abertas e prioridades.
+3. Veja o [Template de README](docs/guias/README_TEMPLATE.md) para padronizar a documentação de cada stack.
+4. Configure o ambiente conforme o [Guia de Ambiente](docs/guias/AMBIENTE.md) (se disponível).
+5. Só então aprofunde-se nos documentos técnicos e de features abaixo.
+
+---
 
 ## 🎯 Documentos Principais
 

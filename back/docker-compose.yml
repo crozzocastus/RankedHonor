@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
+    container_name: rankedhonor-backend
+    restart: unless-stopped
+    volumes:
+      - ../python-api:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongodb
+      - mysql
+
+  mongodb:
+    image: mongo:6.0
+    container_name: rankedhonor-mongodb
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+
+  mysql:
+    image: mysql:8.0
+    container_name: rankedhonor-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: rankedhonor
+      MYSQL_USER: rankedhonor
+      MYSQL_PASSWORD: rankedhonor
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  ngrok:
+    image: ngrok/ngrok:latest
+    container_name: rankedhonor-ngrok
+    restart: unless-stopped
+    command: http backend:8000
+    environment:
+      - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
+    depends_on:
+      - backend
+    ports:
+      - "4040:4040" # Painel web do ngrok
+
+volumes:
+  mongo_data:
+  mysql_data:

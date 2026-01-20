@@ -1,4 +1,7 @@
+
 # Rust Core - RankedHonor Backend
+
+> **Nota:** Este README segue o [template padronizado](../../docs/guias/README_TEMPLATE.md). Mantenha sempre os tópicos obrigatórios atualizados!
 
 High-performance game server, matchmaking engine, and WebSocket server written in Rust.
 

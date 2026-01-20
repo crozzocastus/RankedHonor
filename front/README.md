@@ -1,4 +1,7 @@
+
 # RankedHonor - Frontend
+
+> **Nota:** Este README segue o [template padronizado](../docs/guias/README_TEMPLATE.md). Mantenha sempre os tópicos obrigatórios atualizados!
 
 ![CI Frontend](https://github.com/crozzo/RankedHonor/actions/workflows/ci-frontend.yml/badge.svg)
 ![Security](https://github.com/crozzo/RankedHonor/actions/workflows/security.yml/badge.svg)
